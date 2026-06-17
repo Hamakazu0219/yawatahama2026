@@ -6,25 +6,15 @@
   <title>八幡浜高校 職員研修 2026 | 生成AI × Adobe Creativity</title>
   <style>
     :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f5f5f7;
-      --text-main: #1d1d1f;
-      --text-muted: #86868b;
-      --accent-color: #0066cc;
-      --accent-hover: #0052a3;
-      --accent-soft: rgba(0, 102, 204, 0.08);
-      --adobe-color: #e53935;
-      --adobe-soft: rgba(229, 57, 53, 0.08);
-      --amber: #b45309;
-      --amber-soft: rgba(180, 83, 9, 0.07);
-      --border-color: #d2d2d7;
-      --border-radius: 16px;
-      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      --shadow: 0 8px 32px 0 rgba(0,0,0,0.04);
+      --bg-primary:#ffffff;--bg-secondary:#f5f5f7;--text-main:#1d1d1f;--text-muted:#86868b;
+      --accent-color:#0066cc;--accent-hover:#0052a3;--accent-soft:rgba(0,102,204,.08);
+      --adobe-color:#e53935;--adobe-soft:rgba(229,57,53,.08);
+      --amber:#b45309;--amber-soft:rgba(180,83,9,.07);
+      --border-color:#d2d2d7;--border-radius:16px;
+      --transition:all .5s cubic-bezier(.16,1,.3,1);--shadow:0 8px 32px 0 rgba(0,0,0,.04);
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg-secondary);color:var(--text-main);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
-    /* Header */
     .app-header{position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(0,0,0,.05);background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
     .header-container{max-width:1100px;margin:0 auto;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
     .logo{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1rem;letter-spacing:-.02em;flex-shrink:0;}
@@ -39,7 +29,6 @@
     .step-num{font-size:.65rem;font-weight:700;opacity:.8;}
     .step-label{font-size:.78rem;font-weight:500;}
     .nav-divider{width:12px;height:1px;background:var(--border-color);opacity:.5;}
-    /* Slide */
     .slide-canvas{flex:1;max-width:960px;width:100%;margin:2rem auto;padding:0 1.5rem;}
     .slide-section{display:none;opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);background:var(--bg-primary);border-radius:24px;box-shadow:var(--shadow);padding:3rem;border:1px solid rgba(0,0,0,.02);}
     .slide-section.active{display:block;opacity:1;transform:none;}
@@ -48,9 +37,7 @@
     .badge.adobe-badge{background:var(--adobe-soft);color:var(--adobe-color);}
     .badge.mind-badge{background:var(--amber-soft);color:var(--amber);}
     .slide-title{font-size:2rem;font-weight:800;line-height:1.3;letter-spacing:-.03em;margin-bottom:1rem;}
-    .accent-text{color:var(--accent-color);}
-    .adobe-text{color:var(--adobe-color);}
-    .amber-text{color:var(--amber);}
+    .accent-text{color:var(--accent-color);}.adobe-text{color:var(--adobe-color);}.amber-text{color:var(--amber);}
     .slide-subtitle{font-size:1.05rem;color:var(--text-muted);max-width:680px;margin:0 auto;}
     .part-divider{display:flex;align-items:center;gap:1rem;margin:2.5rem 0;font-size:.78rem;font-weight:700;color:var(--text-muted);}
     .part-divider::before,.part-divider::after{content:'';flex:1;height:1px;background:var(--border-color);}
@@ -66,7 +53,7 @@
     .tag-adobe{background:var(--adobe-soft);color:var(--adobe-color);}
     .tag-admin{background:rgba(142,142,147,.12);color:#555;}
     .tag-lesson{background:rgba(52,199,89,.1);color:#1a7f34;}
-    .tag-mind{background:var(--amber-soft);color:var(--amber);}
+    .tag-socratic{background:rgba(124,58,237,.1);color:#6d28d9;}
     .card-icon-small{font-size:1.4rem;}
     .card-title{font-size:1.1rem;font-weight:750;margin-bottom:.5rem;color:var(--text-main);}
     .card-summary{font-size:.86rem;color:var(--text-muted);flex-grow:1;margin-bottom:.75rem;}
@@ -75,7 +62,6 @@
     .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;}
     .concept-card{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;transition:var(--transition);border:1px solid transparent;}
     .concept-card.hl-border{border-color:rgba(0,102,204,.2);}
-    .concept-card.hl-amber{border-color:rgba(180,83,9,.25);background:rgba(180,83,9,.03);}
     .concept-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
     .card-icon{font-size:2.2rem;margin-bottom:1rem;}
     .concept-card h2{font-size:1.15rem;font-weight:700;margin-bottom:.75rem;}
@@ -101,23 +87,50 @@
     .risk-item.mid{border-color:#ff9800;background:rgba(255,152,0,.04);}
     .risk-body h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem;}
     .risk-body p{font-size:.85rem;color:var(--text-muted);}
-    /* Mind & Machine — Cognitive Offloading */
+    /* Mind & Machine */
     .mm-theory-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
     .mm-card{border-radius:var(--border-radius);padding:1.75rem;border:1px solid;}
     .mm-card.scaffolding{border-color:#3b5bdb;border-left:4px solid #3b5bdb;background:rgba(59,91,219,.03);}
     .mm-card.expertise{border-color:#e67700;border-left:4px solid #e67700;background:rgba(230,119,0,.05);}
+    .mm-card.metacog{border-color:#7c3aed;border-left:4px solid #7c3aed;background:rgba(124,58,237,.04);}
+    .mm-card.znd{border-color:#dc2626;border-left:4px solid #dc2626;background:rgba(220,38,38,.04);}
     .mm-card h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;}
     .mm-card.scaffolding h3{color:#3b5bdb;}
     .mm-card.expertise h3{color:#e67700;}
+    .mm-card.metacog h3{color:#7c3aed;}
+    .mm-card.znd h3{color:#dc2626;}
     .mm-card p{font-size:.88rem;color:var(--text-muted);line-height:1.7;}
-    /* Radar Chart */
+    /* PF Mechanisms */
+    .pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+    .pf-card{background:var(--bg-primary);border-radius:12px;padding:1.25rem;border:1px solid var(--border-color);}
+    .pf-card-num{font-size:.72rem;font-weight:700;color:var(--text-muted);margin-bottom:.4rem;}
+    .pf-card h4{font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+    .pf-card p{font-size:.85rem;color:var(--text-muted);}
+    /* Comparison Table */
+    .compare-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:1.5rem;}
+    .compare-table th{padding:.7rem .9rem;font-weight:700;text-align:center;border-bottom:2px solid var(--border-color);}
+    .compare-table th:first-child{text-align:left;}
+    .compare-table th.col-trad{color:#555;}
+    .compare-table th.col-passive{color:#dc2626;}
+    .compare-table th.col-strategic{color:#1a7f34;}
+    .compare-table td{padding:.65rem .9rem;border-bottom:1px solid var(--bg-secondary);vertical-align:top;}
+    .compare-table td:first-child{font-weight:600;color:var(--text-main);}
+    .compare-table td:not(:first-child){color:var(--text-muted);text-align:center;}
+    .compare-table tr:nth-child(even) td{background:var(--bg-secondary);}
+    .col-highlight{color:#1a7f34 !important;font-weight:600 !important;}
+    .col-danger{color:#dc2626 !important;}
+    /* Radar */
     .radar-box{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;margin-bottom:2rem;}
-    .radar-title{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:1.5rem;}
-    .radar-wrap{display:flex;justify-content:center;align-items:center;}
+    .radar-title{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:.5rem;}
+    .radar-subtitle{font-size:.82rem;color:var(--text-muted);text-align:center;margin-bottom:1.5rem;}
+    .radar-wrap{display:flex;justify-content:center;}
     .radar-mode-btns{display:flex;justify-content:center;gap:.75rem;margin-top:1.25rem;}
     .radar-btn{padding:.45rem 1.1rem;border-radius:99px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-muted);transition:var(--transition);}
     .radar-btn.active{background:var(--text-main);color:#fff;border-color:var(--text-main);}
-    /* Audit Tool */
+    .radar-legend{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;}
+    .radar-legend-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-muted);}
+    .radar-legend-dot{width:12px;height:12px;border-radius:50%;}
+    /* Audit */
     .audit-box{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;margin-bottom:2rem;}
     .audit-box h3{font-size:1.15rem;font-weight:700;margin-bottom:.35rem;}
     .audit-note{font-size:.82rem;color:var(--text-muted);margin-bottom:1.75rem;}
@@ -140,7 +153,7 @@
     .audit-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #3b82f6;transition:left .3s ease;}
     .audit-bar-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);margin-top:.35rem;}
     .audit-hint{background:rgba(59,91,219,.06);border-radius:12px;padding:1rem 1.25rem;margin-top:1.25rem;font-size:.83rem;color:#3b5bdb;line-height:1.65;}
-    /* Strategy Cards */
+    /* Strategy */
     .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
     .strategy-card{background:var(--bg-primary);border-radius:var(--border-radius);padding:1.75rem;border:1px solid var(--border-color);transition:var(--transition);}
     .strategy-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
@@ -199,7 +212,6 @@
     .saved-indicator{font-size:.78rem;color:#28a745;font-weight:700;}
     .plan-preview{font-family:Menlo,Monaco,Consolas,monospace;font-size:.84rem;background:var(--bg-secondary);color:var(--text-main);padding:1.5rem;border-radius:12px;white-space:pre-wrap;margin-bottom:1.5rem;line-height:1.6;max-height:350px;overflow-y:auto;}
     .plan-actions{display:flex;gap:1rem;}
-    /* Buttons */
     .slide-actions{display:flex;justify-content:center;margin-top:3rem;}
     .primary-btn{background:var(--accent-color);color:#fff;border:none;padding:1rem 2rem;font-size:1rem;font-weight:700;border-radius:99px;cursor:pointer;transition:var(--transition);box-shadow:0 4px 14px rgba(0,102,204,.25);}
     .primary-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,102,204,.35);}
@@ -212,7 +224,7 @@
       .step-nav{flex-wrap:wrap;justify-content:center;}
       .nav-divider{display:none;}
       .slide-section{padding:1.5rem;}
-      .concept-grid,.simulator-io,.sandbox-grid,.resources-grid,.action-timeline,.mm-theory-grid,.audit-layout,.strategy-grid{grid-template-columns:1fr;}
+      .concept-grid,.simulator-io,.sandbox-grid,.resources-grid,.action-timeline,.mm-theory-grid,.audit-layout,.strategy-grid,.pf-grid{grid-template-columns:1fr;}
       .slide-title{font-size:1.6rem;}
       .expanded-card{padding:1.5rem;width:95%;}
       .plan-actions{flex-direction:column;}
@@ -230,18 +242,18 @@
         <div class="logo-sub">2026.6.26 &nbsp;|&nbsp; 濱田 和幸（済美平成中等教育学校）</div>
       </div>
     </div>
-    <nav class="step-nav" aria-label="研修ステップ">
-      <button class="nav-btn active" data-step="1"><span class="step-num">01</span><span class="step-label">事前資料集</span></button>
+    <nav class="step-nav">
+      <button class="nav-btn active" data-step="1"><span class="step-num">01</span><span class="step-label">事前資料</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn" data-step="2"><span class="step-num">02</span><span class="step-label">生成AI時代の学校</span></button>
+      <button class="nav-btn" data-step="2"><span class="step-num">02</span><span class="step-label">生成AI時代</span></button>
       <div class="nav-divider"></div>
       <button class="nav-btn mind-nav" data-step="3"><span class="step-num">03</span><span class="step-label">認知オフロード</span></button>
       <div class="nav-divider"></div>
       <button class="nav-btn" data-step="4"><span class="step-num">04</span><span class="step-label">プロンプト体験</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn adobe-nav" data-step="5"><span class="step-num">05</span><span class="step-label">Adobe × Creativity</span></button>
+      <button class="nav-btn adobe-nav" data-step="5"><span class="step-num">05</span><span class="step-label">Adobe</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn" data-step="6"><span class="step-num">06</span><span class="step-label">アクションプラン</span></button>
+      <button class="nav-btn" data-step="6"><span class="step-num">06</span><span class="step-label">アクション</span></button>
     </nav>
   </div>
 </header>
@@ -336,41 +348,81 @@
     <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="3">次へ進む: 認知オフロードと授業デザイン ➔</button></div>
   </section>
 
-  <!-- STEP 3: 認知オフロード (Mind & Machine) -->
+  <!-- STEP 3: 認知オフロード -->
   <section class="slide-section" id="slide-3">
     <div class="concept-intro">
       <span class="badge mind-badge">Step 03 : Mind &amp; Machine</span>
       <h1 class="slide-title">認知オフロードと<br><span class="amber-text">生成AI時代の授業デザイン</span></h1>
-      <p class="slide-subtitle">「教えること」と「AIに任せること」の境界線をどこに引くべきか。<br>鍵は、<strong>既有知識（Prior Knowledge）</strong>と<strong>外部支援（Cognitive Offloading）</strong>のバランスにある。</p>
+      <p class="slide-subtitle">「教えること」と「AIに任せること」の境界線をどこに引くべきか。<br>鍵は <strong>既有知識（Prior Knowledge）</strong> と <strong>外部支援（Cognitive Offloading）</strong> のバランスにある。</p>
     </div>
 
+    <!-- Theory: 4 cards -->
     <div class="mm-theory-grid">
       <div class="mm-card scaffolding">
         <h3>Scaffolding（足場かけ）</h3>
-        <p>学習者が自力では到達できない「発達の最近接領域（ZPD）」の課題を、AIが一時的に支援することで達成可能にする。知識がつくにつれてAIの支援を減らす（フェーディング）のが理想。</p>
+        <p>学習者が自力では到達できない「発達の最近接領域（ZPD）」の課題を、AIが一時的に支援することで達成可能にする。知識がつくにつれてAIの支援を減らす<strong>フェーディング</strong>が理想。</p>
       </div>
       <div class="mm-card expertise">
         <h3>Expertise Reversal Effect</h3>
-        <p>初学者には有益な支援も、熟達者にとっては既に内在化されている知識と干渉し、逆に学習効率を下げたり、単なる「サボり」になってしまう現象。</p>
+        <p>初学者には有益な支援も、熟達者にとっては既に内在化されている知識と干渉し、逆に学習効率を下げたり単なる「サボり」になってしまう現象。支援の量は固定せず<strong>動的に調整</strong>する必要がある。</p>
+      </div>
+      <div class="mm-card metacog">
+        <h3>メタ認知的怠惰（Metacognitive Laziness）</h3>
+        <p>生成AIを使うと、学習者が自己モニタリング・批判的評価のプロセスをバイパスしやすくなる。AIの流暢な回答が「<strong>有能感の錯覚（Illusion of Competence）</strong>」を生む。実証研究では、AI支援後に転移タスクのスコアが<em>低下</em>することが示されている。</p>
+      </div>
+      <div class="mm-card znd">
+        <h3>Zone of No Development（ZND）</h3>
+        <p>足場かけがフェーディングされないまま続くと、AIの支援が永久的な「松葉杖」となり、認知的努力が完全に代替される。学習者はZPDを超えて成長するどころか、<strong>一切の発達が起こらない領域</strong>に留まり続ける。</p>
       </div>
     </div>
 
-    <div class="part-divider">認知プロセス変容の可視化</div>
+    <!-- Productive Failure -->
+    <div class="part-divider">生産的失敗（Productive Failure）— Manu Kapur</div>
+    <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:1.25rem;">「直接教授→演習」の順序を逆転させ、<strong>「問題解決（探索）→教授」</strong>とすることで、深い概念理解と転移力が育まれる。AIは「苦闘を早期に終わらせるツール」ではなく「苦闘を<em>持続させる</em>ツール」として設計する。</p>
+    <div class="pf-grid">
+      <div class="pf-card">
+        <div class="pf-card-num">Mechanism 1</div>
+        <h4>🔦 活性化（Activation）</h4>
+        <p>事前知識を活性化させ、新しい概念との差異を明確にする。「自分は何を知っていて何を知らないか」を浮かび上がらせる。</p>
+      </div>
+      <div class="pf-card">
+        <div class="pf-card-num">Mechanism 2</div>
+        <h4>👁 認識（Awareness）</h4>
+        <p>自分の「知識のギャップ」を痛感させ、後の教授（教師の説明）に対する受容性と注意を高める。失敗が「伏線」になる。</p>
+      </div>
+      <div class="pf-card">
+        <div class="pf-card-num">Mechanism 3</div>
+        <h4>💡 情動（Affect）</h4>
+        <p>認知的不協和を解決したいという状況的興味を喚起する。「なぜ？」という問いが生徒の内側から生まれる瞬間。</p>
+      </div>
+      <div class="pf-card">
+        <div class="pf-card-num">Mechanism 4</div>
+        <h4>🏗 構築（Assembly）</h4>
+        <p>後の定着フェーズに向けた認知的な土台を準備する。苦闘の記憶が、教授内容を「なぜ有効か」まで理解させる足場になる。</p>
+      </div>
+    </div>
 
+    <!-- Radar Chart -->
+    <div class="part-divider">認知プロセス変容の可視化</div>
     <div class="radar-box">
-      <div class="radar-title">AIの関与による認知プロセスへの影響</div>
+      <div class="radar-title">AIの関与スタイルによる学習の質の違い</div>
+      <div class="radar-subtitle">⚠️ 「Atrophy Risk」は産出品質だけが高く、深い学習指標が崩壊する「見かけ上の優秀さ」を示す</div>
       <div class="radar-wrap">
-        <canvas id="radarChart" width="420" height="300"></canvas>
+        <canvas id="radarChart" width="440" height="320"></canvas>
+      </div>
+      <div class="radar-legend">
+        <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#aaa;opacity:.6;"></div>Traditional</div>
+        <div class="radar-legend-item" id="legend-active"><div class="radar-legend-dot" style="background:#3b82f6;"></div>選択中のモード</div>
       </div>
       <div class="radar-mode-btns">
         <button class="radar-btn active" data-mode="traditional">Traditional</button>
-        <button class="radar-btn" data-mode="balanced">Balanced</button>
-        <button class="radar-btn" data-mode="atrophy">Atrophy Risk</button>
+        <button class="radar-btn" data-mode="balanced">Balanced（戦略的オンロード）</button>
+        <button class="radar-btn" data-mode="atrophy">Atrophy Risk（受動的オフロード）</button>
       </div>
     </div>
 
+    <!-- Audit Tool -->
     <div class="part-divider">Offloading Audit：授業設計診断</div>
-
     <div class="audit-box">
       <h3>Offloading Audit v2.0</h3>
       <p class="audit-note">※ 学習者の知識レベルに応じて、最適なAI支援の量は変動します。</p>
@@ -391,30 +443,53 @@
             <input type="range" class="audit-slider" id="ai-slider" min="0" max="100" value="30">
             <div class="slider-range-labels"><span>自力のみ</span><span>ヒント・構成案</span><span>丸投げ・全自動</span></div>
           </div>
-          <div class="audit-hint">💡 <strong>ヒント：</strong>「知識レベル」を最大にして「AI利用」も最大にしてみてください。熟達者の場合、それは「効率的なオフロード（適応的利用）」として肯定的に評価されます。逆に「知識レベル」を最小にして「AI利用」を最大にすると、学習機会の喪失として強い警告が出ます。</div>
+          <div class="audit-hint">💡 <strong>ヒント：</strong>「知識レベル」を最大にして「AI利用」も最大にしてみてください。熟達者の効率的オフロードとして肯定的に評価されます。逆に「知識レベル」最小・「AI利用」最大にすると、学習機会の喪失（ZND）として強い警告が出ます。</div>
         </div>
         <div class="audit-result" id="audit-result">
           <span class="audit-result-badge badge-good" id="audit-badge">GOOD BALANCE</span>
           <h4 id="audit-title">最適な足場かけ (Scaffolding)</h4>
-          <p id="audit-desc">AIが学習者の『できない部分』を適切に補っています。この支援があることで、学習者は本来一人では到達できない高次の目標に取り組むことができています。フェーディング（徐々に支援を減らす）を意識しましょう。</p>
+          <p id="audit-desc">AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。</p>
           <div class="audit-bar-wrap">
             <div class="audit-bar-track"><div class="audit-bar-thumb" id="audit-thumb"></div></div>
-            <div class="audit-bar-labels"><span>負荷不足</span><span>最適な学習ゾーン</span><span>過負荷 / 代行</span></div>
+            <div class="audit-bar-labels"><span>負荷不足</span><span>最適ゾーン</span><span>過負荷 / 代行</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="part-divider">2つの授業デザイン戦略</div>
+    <!-- Comparison Table -->
+    <div class="part-divider">学習モデルの比較分析</div>
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>特徴</th>
+            <th class="col-trad">伝統的直接教授法</th>
+            <th class="col-passive">AI受動型（オフロード）</th>
+            <th class="col-strategic">AI戦略型（オンロード）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>主な目標</td><td>知識の伝達</td><td class="col-danger">タスク完了 / 効率性</td><td class="col-highlight">概念変化 / スキーマ構築</td></tr>
+          <tr><td>失敗の役割</td><td>回避（エラー最小化）</td><td class="col-danger">排除（AIが解決）</td><td class="col-highlight">設計される（活性化に不可欠）</td></tr>
+          <tr><td>認知負荷</td><td>課題外負荷の最小化</td><td class="col-danger">学習寄与負荷の最小化（怠惰）</td><td class="col-highlight">学習寄与負荷の最大化（生産的苦闘）</td></tr>
+          <tr><td>教師の役割</td><td>壇上の賢人</td><td class="col-danger">監視者 / 警察官</td><td class="col-highlight">オーケストレーター / 扇動者</td></tr>
+          <tr><td>生徒の主体性</td><td>受動的受容者</td><td class="col-danger">ツールの管理者</td><td class="col-highlight">能動的意味生成者</td></tr>
+          <tr><td>成果</td><td>流暢性（短期）</td><td class="col-danger">出力品質（高）・学習（低）</td><td class="col-highlight">転移可能なスキル（長期）</td></tr>
+        </tbody>
+      </table>
+    </div>
 
+    <!-- Strategies -->
+    <div class="part-divider">2つの授業デザイン戦略</div>
     <div class="strategy-grid">
       <div class="strategy-card">
         <h3>🪜 Fading Scaffold（消えていく足場）</h3>
-        <p>最初はAIに構成を練らせるが、学期後半はAI利用を禁止し、内在化された知識をテストする。支援を「徐々に外す」設計が学習の定着につながる。</p>
+        <p>最初はAIに構成を練らせるが、学期後半はAI利用を禁止し、内在化された知識をテストする。支援を「徐々に外す」設計が学習の定着につながる。<strong>AIへの依存が「松葉杖」にならないための必須設計</strong>。</p>
       </div>
       <div class="strategy-card">
         <h3>🎯 High-Road Transfer（高次への転移）</h3>
-        <p>計算や翻訳などの「低次スキル」をAIに完全にオフロードし、浮いた認知資源で「批判的吟味」という高次スキルを訓練する。AIで「何を空けるか」を設計する。</p>
+        <p>計算や翻訳などの「低次スキル」をAIに完全にオフロードし、浮いた認知資源で「批判的吟味」という高次スキルを訓練する。<strong>「何をAIに空けさせるか」を意図的に設計する</strong>ことが核心。</p>
       </div>
     </div>
 
@@ -447,10 +522,10 @@
         <p class="card-summary">テスト後・作品提出後の個別フィードバック文のテンプレートを作成します。</p>
         <div class="card-action-hint">クリックして展開</div>
       </button>
-      <button class="sandbox-card" data-card-id="quiz">
-        <div class="card-meta"><span class="card-tag tag-lesson">授業デザイン</span><span class="card-icon-small">💡</span></div>
-        <h2 class="card-title">導入クイズ・アイスブレイク</h2>
-        <p class="card-summary">生徒の知的好奇心に火をつける、驚きのある導入クイズを作成します。</p>
+      <button class="sandbox-card" data-card-id="socratic">
+        <div class="card-meta"><span class="card-tag tag-socratic">ソクラテス的AI</span><span class="card-icon-small">🔮</span></div>
+        <h2 class="card-title">ソクラテス的AIプロンプト設計</h2>
+        <p class="card-summary">AIを「答えを与える機械」から「問いを投げかける思考パートナー」へ変換するプロンプトを作ります。</p>
         <div class="card-action-hint">クリックして展開</div>
       </button>
     </div>
@@ -468,12 +543,12 @@
       <article class="concept-card">
         <div class="card-icon">✨</div>
         <h2>Adobe Express</h2>
-        <p>テンプレートから選ぶだけでプロ品質のビジュアルが完成。ポスター・スライド・動画・SNS投稿すべてブラウザで作れます。授業の成果物づくりに最適。</p>
+        <p>テンプレートから選ぶだけでプロ品質のビジュアルが完成。ポスター・スライド・動画・SNS投稿すべてブラウザで作れます。</p>
       </article>
       <article class="concept-card" style="border-color:rgba(229,57,53,.2);">
         <div class="card-icon">🔥</div>
         <h2>Adobe Firefly</h2>
-        <p>著作権クリアな素材でトレーニングされた画像生成AI。日本語プロンプトに対応。生成した画像はExpressに読み込んでポスター制作に活かせます。</p>
+        <p>著作権クリアな素材でトレーニングされた画像生成AI。日本語プロンプトに対応。生成した画像をExpressに読み込んでポスター制作に活かせます。</p>
       </article>
     </div>
     <div class="part-divider">教科別 Adobe Express 活用例</div>
@@ -522,7 +597,7 @@
       </div>
       <div class="form-group">
         <label for="ref-method"><span class="label-badge">問 2</span>認知オフロードの観点から、AIの支援を<strong>「どこまで・どのタイミングで」</strong>使いますか？（Fading Scaffold / High-Road Transfer の視点で）</label>
-        <textarea id="ref-method" placeholder="例：最初の2週間はAIで構成案を作らせ、3週目からは自力で書かせる（Fading Scaffold）。Adobe Expressで探究発表のポスターを生徒に作らせる単元を設計し、デザイン作業はAIに任せて批判的思考の時間を増やす（High-Road Transfer）。"></textarea>
+        <textarea id="ref-method" placeholder="例：最初の2週間はAIで構成案を作らせるが、3週目からは自力で書かせる（Fading Scaffold）。Adobe Expressのデザイン作業はAIに任せ、批判的思考の時間を増やす（High-Road Transfer）。"></textarea>
       </div>
       <div class="form-group">
         <label for="ref-teacher-name">執筆者（お名前）</label>
@@ -559,140 +634,146 @@
 </footer>
 
 <script>
-// ===== Data =====
-const simulatorData = {
+// ===== Simulator Data =====
+const simulatorData={
   1:{input:"授業案を書いてください。",output:"【授業案】\n単元名：〇〇\n目標：〜について理解する。\n導入（5分）：前回の復習\n展開（35分）：教師による説明\nまとめ（10分）：振り返りシート記入"},
-  2:{input:"高校2年生の現代文で「語り手と視点」の授業案を作ってください。グループ活動を含めてください。",output:"【現代文 授業案：語り手と視点】\n■目標：語り手の違いによって読者の印象がどう変わるかを理解し、作品を多角的に分析できる。\n■導入（5分）：同じ場面を「一人称」と「三人称」で書き分けた短文を提示。\n■展開（30分）：グループで担当箇所の語り手を特定し、語り手を変えたバージョンを口頭で考える。\n■まとめ（10分）：各グループの考察をシェア。"},
+  2:{input:"高校2年生の現代文で「語り手と視点」の授業案を作ってください。グループ活動を含めてください。",output:"【現代文 授業案：語り手と視点】\n■目標：語り手の違いによって読者の印象がどう変わるかを理解し、作品を多角的に分析できる。\n■導入（5分）：同じ場面を「一人称」と「三人称」で書き分けた短文を提示。\n■展開（30分）：グループで担当箇所の語り手を特定し、語り手を変えたバージョンを考える。\n■まとめ（10分）：各グループの考察をシェア。"},
   3:{input:"【私の意図】語り手の視点が変わると登場人物の心理描写も変わることを「体感」として理解してほしい。自分の作文にも活かせる感覚を掴んでほしい。\n【担当】高校2年国語\n【条件】グループ活動20分・生徒が書く活動を含める",output:"【現代文 授業案：視点の「体感」ワーク】\n■本時のゴール：語り手を変えることで同一場面が「別の物語」に変容することを、書く体験を通じて実感する。\n■導入（5分）：「夕焼けを見ている少女」を①少女視点・②通行人視点で音読。「どう違った？」を問う。\n■展開①（10分）：教科書の一場面を選び、語り手と登場人物の関係を図で整理。\n■展開②（20分）：同じ場面を「語り手を変えて」100字で書き直す→グループで読み合い言語化。\n■まとめ（15分）：「語り手の選択」は作家の意図であることを確認。振り返り欄に記入。"}
 };
 
-const promptCards = {
+// ===== Prompt Cards =====
+const promptCards={
   newsletter:{title:"学級だよりの作成・添削",icon:"📝",tag:"校務効率化",tagClass:"tag-admin",desc:"保護者に伝えたい教育意図を、温かく伝わる文章に整えます。",intentQuestion:"この学級だよりを通じて、保護者に「最も伝えたい子どもの姿や教育意図」は何ですか？",defaultIntent:"中間テストで点数が伸び悩んだ生徒にも、努力したプロセス自体を誇りに思ってほしい。保護者と一緒に「結果だけでなく過程を見る目」を育てたいというメッセージを届けたい。",template:i=>`【前提と役割】\nあなたは八幡浜高校の温かく生徒思いの学級担任です。\n\n【私の教育意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図に基づき、保護者向けの「学級だより」のコラム記事を1つ作成してください。\n\n【出力の条件】\n- タイトルは温かく読者の心を動かすものにしてください\n- 押し付けがましくなく、生徒の葛藤や小さな努力に寄り添うトーンで\n- 400〜600字程度`},
   lesson:{title:"授業案・発問づくり",icon:"📚",tag:"授業デザイン",tagClass:"tag-lesson",desc:"生徒が「なぜ？」と考えたくなる発問と授業の流れを一緒に作ります。",intentQuestion:"この授業で生徒に「体感」させたいこと・気づかせたいことは何ですか？",defaultIntent:"公民の授業で「表現の自由」の限界について考えさせたい。正解を教えるのではなく、生徒が「自分はどこまで許容できるか」を他者と対話しながら言語化できるようにしたい。",template:i=>`【前提と役割】\nあなたはアクティブ・ラーニングを取り入れている高校の熱心な教諭です。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図を実現する45分の授業案を作成してください。\n\n【出力の構成】\n1. 本時のゴール（生徒が授業後に言えること）\n2. 導入（5〜10分）：生徒の知的好奇心に火をつける問いかけ\n3. 展開（25〜30分）：対話・協働を含む活動\n4. まとめ（5〜10分）：振り返りの問い`},
   feedback:{title:"生徒へのフィードバックコメント",icon:"💬",tag:"校務効率化",tagClass:"tag-admin",desc:"テスト後・作品提出後の個別フィードバック文のテンプレートを作成します。",intentQuestion:"フィードバックを受け取る生徒の状況と、あなたが最も伝えたいメッセージは何ですか？",defaultIntent:"小論文を提出した生徒に、テーマへの着眼点は良かったが根拠の具体性が不足していることを伝えたい。傷つけず、次に向けて前向きになれるコメントを書きたい。",template:i=>`【前提と役割】\nあなたは生徒一人ひとりの成長を支える丁寧なフィードバックを心がける高校教諭です。\n\n【生徒の状況と伝えたいこと（Human Intent）】\n${i}\n\n【タスク】\n個別フィードバックコメントを3パターン作成してください。\n\n- パターンA：良かった点を前面に出した肯定的フィードバック\n- パターンB：改善点を具体的に示す成長志向フィードバック\n- パターンC：次の目標設定を促すコーチング型フィードバック\n- 各100〜150字程度`},
-  quiz:{title:"導入クイズ・アイスブレイク",icon:"💡",tag:"授業デザイン",tagClass:"tag-lesson",desc:"生徒の知的好奇心に火をつける、驚きのある導入クイズを作成します。",intentQuestion:"この授業のテーマは何ですか？生徒に「えっ！そうなの？」と驚いてほしい本質的な問いは何ですか？",defaultIntent:"数学の確率の授業。直感と計算結果が大きくズレる事例（誕生日のパラドックスなど）を使って「数学って面白い」と思わせる導入をしたい。",template:i=>`【前提と役割】\nあなたは生徒を惹きつける授業導入のプロフェッショナルです。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n授業最初の5分で実施する「導入用3択クイズ」を1問作成してください。\n\n- クイズ問題文（直感を裏切る少し意外なもの）\n- 選択肢A・B・C\n- 正解の解説（なぜこのテーマが大切かを含む）\n- 知的好奇心を刺激する一言締め`}
+  socratic:{title:"ソクラテス的AIプロンプト設計",icon:"🔮",tag:"ソクラテス的AI",tagClass:"tag-socratic",desc:"AIを「答えを与える機械」から「問いを投げかける思考パートナー」に変換します。生産的失敗を引き起こすプロンプトを設計しましょう。",intentQuestion:"生徒に「苦闘させたい」概念・テーマは何ですか？また、生徒が陥りやすい「わかった気」になる典型的な誤解は何ですか？",defaultIntent:"「権利」と「願望」の違いを生徒に体感させたい。生徒はよく「やりたいことができないのは権利の侵害」と誤解しがち。AIに答えを教えるのではなく、概念の境界線に気づかせたい。",template:i=>`【あなたの役割】
+あなたはソクラテス的問答法を実践するAIチューターです。
+絶対に直接的な答えを与えないでください。
+
+【苦闘させたいテーマと典型的な誤解】
+${i}
+
+【ルール】
+1. 生徒の発言の「曖昧さ」や「境界線の不明確さ」を突く問いを返す
+2. 反事実的な質問を使う（「もし〜だったら、あなたの定義はまだ成立しますか？」）
+3. 生徒の具体例を使って概念の限界を露わにする
+4. 生徒が「わかった」と言っても、さらに深い問いで揺さぶる
+5. 「正解」への誘導は最後まで行わない
+
+【使い方】
+このプロンプトをClaude/ChatGPTに設定した後、生徒に「あなたの考えを自由に入力してください」と指示する。
+AIは答えを与えず、問いを返し続けます。`}
 };
 
-// ===== Radar Chart Data =====
-const radarData = {
-  traditional:{記憶:75,構成:80,執筆:70,形式:65,評価:30,統合:25},
-  balanced:{記憶:55,構成:45,執筆:40,形式:35,評価:75,統合:80},
-  atrophy:{記憶:20,構成:15,執筆:10,形式:25,評価:30,統合:20}
+// ===== Radar Chart =====
+// Axes: 批判的思考, 概念理解, 転移力, メタ認知, 産出品質, 自律学習
+// Atrophy Risk: 産出品質だけ高く、深い学習指標は崩壊 → 危険なパラドックス
+const radarData={
+  traditional:{批判的思考:42,概念理解:55,転移力:45,メタ認知:38,産出品質:62,自律学習:32},
+  balanced:{批判的思考:82,概念理解:85,転移力:80,メタ認知:76,産出品質:68,自律学習:78},
+  atrophy:{批判的思考:15,概念理解:18,転移力:10,メタ認知:8,産出品質:92,自律学習:12}
 };
-const radarColors = {traditional:'rgba(130,130,140,0.3)',balanced:'rgba(59,130,246,0.35)',atrophy:'rgba(239,68,68,0.3)'};
-const radarStrokes = {traditional:'#8282a0',balanced:'#3b82f6',atrophy:'#ef4444'};
-let currentRadarMode = 'traditional';
+const radarColors={traditional:'rgba(150,150,160,.22)',balanced:'rgba(59,130,246,.35)',atrophy:'rgba(239,68,68,.35)'};
+const radarStrokes={traditional:'#aaa',balanced:'#3b82f6',atrophy:'#ef4444'};
+const legendLabels={traditional:'Traditional（伝統的教授法）',balanced:'Balanced（戦略的オンロード）',atrophy:'Atrophy Risk（受動的オフロード）'};
+let currentMode='traditional';
 
-function drawRadar(canvas, mode){
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
+function drawRadar(canvas,mode){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,r=Math.min(W,H)*.37;
   ctx.clearRect(0,0,W,H);
-  const cx = W/2, cy = H/2, r = Math.min(W,H)*0.38;
-  const keys = ['記憶','構成','執筆','形式','評価','統合'];
-  const n = keys.length;
-  const angles = keys.map((_,i)=> -Math.PI/2 + (2*Math.PI/n)*i);
-
+  const keys=['批判的思考','概念理解','転移力','メタ認知','産出品質','自律学習'];
+  const n=keys.length;
+  const angles=keys.map((_,i)=>-Math.PI/2+(2*Math.PI/n)*i);
   // Grid
   for(let g=1;g<=5;g++){
     ctx.beginPath();
-    angles.forEach((a,i)=>{
-      const x = cx+r*(g/5)*Math.cos(a), y = cy+r*(g/5)*Math.sin(a);
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    });
-    ctx.closePath();
-    ctx.strokeStyle='rgba(0,0,0,0.07)';ctx.lineWidth=1;ctx.stroke();
+    angles.forEach((a,i)=>{const x=cx+r*(g/5)*Math.cos(a),y=cy+r*(g/5)*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.closePath();ctx.strokeStyle='rgba(0,0,0,.07)';ctx.lineWidth=1;ctx.stroke();
   }
   // Axes + labels
   angles.forEach((a,i)=>{
     ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
-    ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=1;ctx.stroke();
-    ctx.font='bold 13px system-ui';ctx.fillStyle='#555';ctx.textAlign='center';ctx.textBaseline='middle';
-    const lx=cx+(r+22)*Math.cos(a), ly=cy+(r+22)*Math.sin(a);
-    ctx.fillText(keys[i],lx,ly);
+    ctx.strokeStyle='rgba(0,0,0,.1)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font='bold 12px system-ui';ctx.fillStyle='#444';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(keys[i],cx+(r+24)*Math.cos(a),cy+(r+24)*Math.sin(a));
   });
-
-  // Traditional (gray)
-  const td = radarData.traditional;
+  // Traditional (always shown as baseline)
+  const td=radarData.traditional;
   ctx.beginPath();
-  angles.forEach((a,i)=>{
-    const v = td[keys[i]]/100;
-    const x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  });
-  ctx.closePath();ctx.fillStyle='rgba(150,150,160,0.2)';ctx.fill();
-  ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.stroke();
-
+  angles.forEach((a,i)=>{const v=td[keys[i]]/100,x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.closePath();ctx.fillStyle='rgba(150,150,160,.18)';ctx.fill();ctx.strokeStyle='#bbb';ctx.lineWidth=1.5;ctx.stroke();
   // Selected mode
-  const d = radarData[mode];
-  ctx.beginPath();
-  angles.forEach((a,i)=>{
-    const v = d[keys[i]]/100;
-    const x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);
-    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  });
-  ctx.closePath();ctx.fillStyle=radarColors[mode];ctx.fill();
-  ctx.strokeStyle=radarStrokes[mode];ctx.lineWidth=2.5;ctx.stroke();
+  if(mode!=='traditional'){
+    const d=radarData[mode];
+    ctx.beginPath();
+    angles.forEach((a,i)=>{const v=d[keys[i]]/100,x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.closePath();ctx.fillStyle=radarColors[mode];ctx.fill();ctx.strokeStyle=radarStrokes[mode];ctx.lineWidth=2.5;ctx.stroke();
+  }
+  // Atrophy warning annotation
+  if(mode==='atrophy'){
+    ctx.font='bold 11px system-ui';ctx.fillStyle='#ef4444';ctx.textAlign='center';
+    const pa=angles[4];// 産出品質 index
+    ctx.fillText('⚠ 高い産出品質',cx+(r*.92+24)*Math.cos(pa),cy+(r*.92+24)*Math.sin(pa)-12);
+  }
+  // Update legend
+  document.getElementById('legend-active').querySelector('div').style.background=radarStrokes[mode];
+  document.getElementById('legend-active').lastChild.textContent=legendLabels[mode];
 }
 
-// ===== Audit Tool Logic =====
+// ===== Audit Tool =====
 function getAuditResult(know,complex,ai){
-  const gap = complex - know;
-  const overload = ai - know;
-  if(know>70 && ai>70) return {badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:75};
-  if(know<30 && ai>70) return {badge:'badge-danger',badgeText:'DANGER',title:'学習機会の喪失',desc:'初学者がAIに丸投げしている状態です。本来スキルとして習得すべきプロセスをAIが肩代わりしており、思考の萎縮（Atrophy）が起きています。',pos:95};
-  if(gap>40 && ai>40 && ai<75) return {badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。学習者は本来一人では到達できない高次の目標に取り組めています。フェーディングを意識しましょう。',pos:50};
-  if(ai<20) return {badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題の難度に対してAIの支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:15};
-  if(overload>50) return {badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、かえって学習効率を下げる可能性があります。',pos:85};
-  return {badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:48};
+  const overload=ai-know;
+  if(know>70&&ai>70)return{badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:70};
+  if(know<30&&ai>70)return{badge:'badge-danger',badgeText:'ZND DANGER',title:'学習機会の喪失（Zone of No Development）',desc:'初学者がAIに丸投げしている状態です。本来習得すべきプロセスをAIが肩代わりし、認知的萎縮（Atrophy）が起きています。メタ認知的怠惰の典型パターンです。',pos:95};
+  if(complex>50&&ai>30&&ai<70&&know<60)return{badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。',pos:50};
+  if(ai<15)return{badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題難度に対してAI支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:15};
+  if(overload>50)return{badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、逆に学習効率を下げる可能性があります（Expertise Reversal Effect）。',pos:82};
+  return{badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:48};
 }
 
 function updateAudit(){
-  const know = +document.getElementById('know-slider').value;
-  const complex = +document.getElementById('complex-slider').value;
-  const ai = +document.getElementById('ai-slider').value;
-  const klabels=['全く知らない','初学者','基礎はある','中級者','上級者','専門家レベル'];
-  const clabels=['単純','やや複雑','複雑','高度','未解決に近い'];
-  const alabels=['自力のみ','補助','ヒント活用','構成任せ','丸投げ'];
-  document.getElementById('know-label').textContent=klabels[Math.round(know/25)]||'専門家レベル';
-  document.getElementById('complex-label').textContent=clabels[Math.round(complex/25)]||'未解決に近い';
-  document.getElementById('ai-label').textContent=alabels[Math.round(ai/25)]||'丸投げ';
+  const know=+document.getElementById('know-slider').value;
+  const complex=+document.getElementById('complex-slider').value;
+  const ai=+document.getElementById('ai-slider').value;
+  const kl=['全く知らない','初学者','基礎はある','中級者','上級者','専門家'];
+  const cl=['単純','やや複雑','複雑','高度','未解決'];
+  const al=['自力のみ','補助','ヒント活用','構成任せ','丸投げ'];
+  document.getElementById('know-label').textContent=kl[Math.min(Math.round(know/20),5)];
+  document.getElementById('complex-label').textContent=cl[Math.min(Math.round(complex/25),4)];
+  document.getElementById('ai-label').textContent=al[Math.min(Math.round(ai/25),4)];
   const r=getAuditResult(know,complex,ai);
   const badge=document.getElementById('audit-badge');
-  badge.className='audit-result-badge '+r.badge;
-  badge.textContent=r.badgeText;
+  badge.className='audit-result-badge '+r.badge;badge.textContent=r.badgeText;
   document.getElementById('audit-title').textContent=r.title;
   document.getElementById('audit-desc').textContent=r.desc;
   document.getElementById('audit-thumb').style.left=r.pos+'%';
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  // Navigation
+  // Nav
   const navBtns=document.querySelectorAll('.nav-btn');
   const slides=document.querySelectorAll('.slide-section');
   const switchSlide=t=>{
     navBtns.forEach(b=>b.classList.toggle('active',b.getAttribute('data-step')===t));
     slides.forEach(s=>{const on=s.id==='slide-'+t;s.classList.toggle('active',on);s.setAttribute('aria-hidden',!on);});
     document.querySelector('.app-header').scrollIntoView({behavior:'smooth'});
-    if(t==='3'){setTimeout(()=>drawRadar(document.getElementById('radarChart'),currentRadarMode),100);}
+    if(t==='3'){setTimeout(()=>drawRadar(document.getElementById('radarChart'),currentMode),80);}
   };
   navBtns.forEach(b=>b.addEventListener('click',()=>switchSlide(b.getAttribute('data-step'))));
   document.querySelectorAll('.next-step-btn').forEach(b=>b.addEventListener('click',()=>switchSlide(b.getAttribute('data-target'))));
 
-  // Intent Simulator
+  // Simulator
   const slider=document.getElementById('intent-slider');
-  const inBox=document.getElementById('sim-input-box');
-  const outBox=document.getElementById('sim-output-box');
-  const upSim=v=>{inBox.textContent=simulatorData[v].input;outBox.textContent=simulatorData[v].output;};
+  const upSim=v=>{document.getElementById('sim-input-box').textContent=simulatorData[v].input;document.getElementById('sim-output-box').textContent=simulatorData[v].output;};
   slider.addEventListener('input',e=>upSim(e.target.value));upSim(1);
 
-  // Radar
-  const radarCanvas=document.getElementById('radarChart');
+  // Radar buttons
   document.querySelectorAll('.radar-btn').forEach(b=>{
     b.addEventListener('click',()=>{
       document.querySelectorAll('.radar-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      currentRadarMode=b.getAttribute('data-mode');
-      drawRadar(radarCanvas,currentRadarMode);
+      b.classList.add('active');currentMode=b.getAttribute('data-mode');
+      drawRadar(document.getElementById('radarChart'),currentMode);
     });
   });
 
@@ -730,8 +811,7 @@ document.addEventListener('DOMContentLoaded',()=>{
           </div>
         </div>`;
       const inp=document.getElementById('sb-input'),prev=document.getElementById('prompt-preview'),cpBtn=document.getElementById('copy-prompt-btn');
-      const upd=()=>{prev.textContent=data.template(inp.value);};
-      inp.addEventListener('input',upd);upd();
+      const upd=()=>{prev.textContent=data.template(inp.value);};inp.addEventListener('input',upd);upd();
       cpBtn.addEventListener('click',()=>{navigator.clipboard.writeText(prev.textContent).then(()=>{const o=cpBtn.textContent;cpBtn.textContent='✓ コピー完了！';cpBtn.style.background='#28a745';setTimeout(()=>{cpBtn.textContent=o;cpBtn.style.background='';},1500);});});
       overlay.classList.add('visible');
       const lRect=expCard.getBoundingClientRect();
@@ -741,7 +821,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       expContent.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:350,delay:200,easing:'ease-out',fill:'both'});
     });
   });
-
   const closeOverlay=()=>{
     if(!activeCard||!firstRect){overlay.classList.remove('visible');return;}
     const cR=expCard.getBoundingClientRect();
@@ -751,7 +830,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
   closeBtn.addEventListener('click',closeOverlay);backdrop.addEventListener('click',closeOverlay);
 
-  // Reflection Form
+  // Reflection
   const form=document.getElementById('reflection-form');
   const resultBox=document.getElementById('action-plan-result');
   const planOut=document.getElementById('plan-output-text');
