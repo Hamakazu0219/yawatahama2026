@@ -15,200 +15,207 @@
       --accent-soft: rgba(0, 102, 204, 0.08);
       --adobe-color: #e53935;
       --adobe-soft: rgba(229, 57, 53, 0.08);
+      --amber: #b45309;
+      --amber-soft: rgba(180, 83, 9, 0.07);
       --border-color: #d2d2d7;
       --border-radius: 16px;
-      --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow: 0 8px 32px 0 rgba(0,0,0,0.04);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-secondary); color: var(--text-main); line-height: 1.6;
-      -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
-      background-color: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    }
-    .header-container {
-      max-width: 1100px; margin: 0 auto; padding: 1.1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-    }
-    .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; flex-shrink: 0; }
-    .logo-icon { font-size: 1.3rem; }
-    .logo-sub { font-size: 0.72rem; color: var(--text-muted); font-weight: 400; }
-    .step-nav { display: flex; align-items: center; gap: 0.4rem; }
-    .nav-btn {
-      background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
-      padding: 0.45rem 0.9rem; border-radius: 99px; transition: var(--transition-smooth); color: var(--text-muted);
-    }
-    .nav-btn.active { background-color: var(--accent-soft); color: var(--accent-color); }
-    .nav-btn.active.adobe-nav { background-color: var(--adobe-soft); color: var(--adobe-color); }
-    .nav-btn:hover:not(.active) { background-color: rgba(0,0,0,0.03); color: var(--text-main); }
-    .step-num { font-size: 0.68rem; font-weight: 700; opacity: 0.8; }
-    .step-label { font-size: 0.8rem; font-weight: 500; }
-    .nav-divider { width: 14px; height: 1px; background-color: var(--border-color); opacity: 0.5; }
-    .slide-canvas { flex: 1; max-width: 960px; width: 100%; margin: 2rem auto; padding: 0 1.5rem; }
-    .slide-section {
-      display: none; opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
-      background: var(--bg-primary); border-radius: 24px; box-shadow: var(--glass-shadow);
-      padding: 3rem; border: 1px solid rgba(0,0,0,0.02);
-    }
-    .slide-section.active { display: block; opacity: 1; transform: translateY(0); }
-    .concept-intro { text-align: center; margin-bottom: 3rem; }
-    .badge {
-      display: inline-block; padding: 0.4rem 1rem; background-color: var(--accent-soft); color: var(--accent-color);
-      font-size: 0.75rem; font-weight: 700; border-radius: 99px; margin-bottom: 1rem;
-    }
-    .badge.adobe-badge { background-color: var(--adobe-soft); color: var(--adobe-color); }
-    .slide-title { font-size: 2.1rem; font-weight: 800; line-height: 1.3; letter-spacing: -0.03em; margin-bottom: 1rem; }
-    .accent-text { color: var(--accent-color); }
-    .adobe-text { color: var(--adobe-color); }
-    .slide-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
-    .part-divider {
-      display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0;
-      font-size: 0.78rem; font-weight: 700; color: var(--text-muted);
-    }
-    .part-divider::before, .part-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
-    .resources-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-    .resource-card {
-      text-decoration: none; background-color: var(--bg-secondary); border-radius: var(--border-radius);
-      padding: 1.75rem; border: 1px solid transparent; display: flex; flex-direction: column;
-      justify-content: space-between; min-height: 210px; transition: var(--transition-smooth);
-    }
-    .resource-card:hover { transform: translateY(-4px); background-color: var(--bg-primary); border-color: var(--border-color); box-shadow: var(--glass-shadow); }
-    .resource-card.highlight-blue { border-color: rgba(0,102,204,0.12); }
-    .resource-card.highlight-blue:hover { border-color: var(--accent-color); }
-    .resource-card.highlight-red { border-color: rgba(229,57,53,0.12); }
-    .resource-card.highlight-red:hover { border-color: var(--adobe-color); }
-    .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-    .card-tag { font-size: 0.68rem; font-weight: 700; padding: 0.22rem 0.55rem; border-radius: 99px; }
-    .tag-ai { background-color: var(--accent-soft); color: var(--accent-color); }
-    .tag-adobe { background-color: var(--adobe-soft); color: var(--adobe-color); }
-    .tag-admin { background-color: rgba(142,142,147,0.12); color: #555; }
-    .tag-lesson { background-color: rgba(52,199,89,0.1); color: #1a7f34; }
-    .card-icon-small { font-size: 1.4rem; }
-    .card-title { font-size: 1.1rem; font-weight: 750; margin-bottom: 0.5rem; color: var(--text-main); }
-    .card-summary { font-size: 0.86rem; color: var(--text-muted); flex-grow: 1; margin-bottom: 0.75rem; }
-    .card-action-hint { font-size: 0.78rem; font-weight: 600; color: var(--accent-color); }
-    .card-action-hint.adobe-hint { color: var(--adobe-color); }
-    .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
-    .concept-card {
-      background-color: var(--bg-secondary); border-radius: var(--border-radius); padding: 2rem;
-      transition: var(--transition-smooth); border: 1px solid transparent;
-    }
-    .concept-card.highlight-border { border-color: rgba(0,102,204,0.2); }
-    .concept-card:hover { transform: translateY(-4px); box-shadow: var(--glass-shadow); }
-    .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
-    .concept-card h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .concept-card p { font-size: 0.92rem; color: var(--text-muted); }
-    .simulator-box { background-color: var(--bg-secondary); border-radius: var(--border-radius); padding: 2rem; margin-top: 2rem; }
-    .simulator-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .simulator-desc { font-size: 0.86rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-    .slider-container {
-      display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
-      background: var(--bg-primary); padding: 1rem 1.5rem; border-radius: 12px;
-    }
-    .slider-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); flex-shrink: 0; }
-    .slider-label.label-high { color: var(--accent-color); }
-    #intent-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 99px; background: var(--border-color); outline: none; }
-    #intent-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-color); cursor: pointer; transition: var(--transition-smooth); }
-    #intent-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    .simulator-io { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .io-panel { background: var(--bg-primary); border-radius: 12px; padding: 1.25rem; border: 1px solid rgba(0,0,0,0.05); }
-    .io-panel h4 { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.75rem; }
-    .code-view { font-family: Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; white-space: pre-wrap; color: var(--text-main); background-color: var(--bg-secondary); padding: 1rem; border-radius: 8px; min-height: 120px; }
-    .risk-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-    .risk-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 1.5rem; border-radius: 12px; border-left: 4px solid; }
-    .risk-item.high { border-color: #e53935; background-color: rgba(229,57,53,0.04); }
-    .risk-item.mid { border-color: #ff9800; background-color: rgba(255,152,0,0.04); }
-    .risk-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .risk-body p { font-size: 0.85rem; color: var(--text-muted); }
-    .sandbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; margin-bottom: 3rem; }
-    .sandbox-card {
-      background-color: var(--bg-secondary); border-radius: var(--border-radius); padding: 2rem;
-      border: 1px solid transparent; cursor: pointer; text-align: left; transition: var(--transition-smooth);
-      display: flex; flex-direction: column; justify-content: space-between; min-height: 195px;
-    }
-    .sandbox-card:hover { transform: translateY(-4px); background-color: var(--bg-primary); border-color: var(--border-color); box-shadow: var(--glass-shadow); }
-    .magic-move-overlay {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1000;
-      display: flex; justify-content: center; align-items: center;
-      visibility: hidden; opacity: 0; transition: visibility 0.4s, opacity 0.4s ease;
-    }
-    .magic-move-overlay.visible { visibility: visible; opacity: 1; }
-    .overlay-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(29,29,31,0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
-    .expanded-card {
-      position: relative; background: var(--bg-primary); width: 90%; max-width: 780px; max-height: 85vh;
-      border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); overflow-y: auto; z-index: 1010; padding: 3rem;
-      transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-    }
-    .magic-move-overlay.visible .expanded-card { transform: scale(1); }
-    .close-overlay-btn {
-      position: absolute; top: 1.5rem; right: 1.5rem; width: 36px; height: 36px; border-radius: 50%;
-      background: var(--bg-secondary); border: none; cursor: pointer; display: flex; align-items: center;
-      justify-content: center; font-size: 1rem; font-weight: 700; transition: var(--transition-smooth);
-    }
-    .close-overlay-btn:hover { background: var(--border-color); transform: rotate(90deg); }
-    .expanded-header { margin-bottom: 2rem; border-bottom: 1px solid var(--bg-secondary); padding-bottom: 1.5rem; }
-    .expanded-badge-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; }
-    .expanded-title { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .expanded-desc { color: var(--text-muted); font-size: 0.95rem; }
-    .expanded-section { margin-bottom: 2rem; }
-    .expanded-section h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .intent-question-card { background-color: var(--accent-soft); border-left: 4px solid var(--accent-color); padding: 1.1rem 1.4rem; border-radius: 0 12px 12px 0; margin-bottom: 1rem; }
-    .intent-question-card p { font-size: 0.92rem; font-weight: 600; }
-    .sandbox-textarea {
-      width: 100%; min-height: 90px; border-radius: 12px; border: 1px solid var(--border-color);
-      padding: 1rem; font-size: 0.92rem; font-family: inherit; outline: none; resize: vertical;
-      background-color: var(--bg-secondary); transition: var(--transition-smooth); margin-bottom: 1rem;
-    }
-    .sandbox-textarea:focus { border-color: var(--accent-color); background-color: var(--bg-primary); box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
-    .prompt-output-container { position: relative; }
-    .copy-badge-btn { position: absolute; top: 0.75rem; right: 0.75rem; background-color: var(--accent-color); color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
-    .prompt-view { font-family: Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; background-color: #1d1d1f; color: #f5f5f7; padding: 1.5rem; border-radius: 12px; white-space: pre-wrap; min-height: 150px; }
-    .info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 1.5rem; }
-    .info-table th { background-color: var(--text-main); color: var(--bg-primary); text-align: left; padding: 0.7rem 1rem; font-weight: 600; }
-    .info-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--bg-secondary); }
-    .info-table tr:nth-child(even) td { background-color: var(--bg-secondary); }
-    .action-timeline { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-    .timeline-card { background: var(--bg-secondary); border-radius: var(--border-radius); padding: 1.5rem; }
-    .timeline-when { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-    .timeline-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
-    .timeline-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .timeline-card li { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; }
-    .timeline-card li::before { content: '•'; color: var(--accent-color); flex-shrink: 0; }
-    .reflection-form { background: var(--bg-secondary); border-radius: var(--border-radius); padding: 2.5rem; }
-    .form-group { margin-bottom: 2rem; }
-    .form-group label { display: block; font-weight: 700; font-size: 0.96rem; margin-bottom: 0.75rem; }
-    .label-badge { display: inline-block; background-color: var(--text-main); color: var(--bg-primary); font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-right: 0.5rem; }
-    .reflection-form textarea { width: 100%; min-height: 110px; border-radius: 12px; border: 1px solid var(--border-color); padding: 1rem; font-size: 0.92rem; font-family: inherit; outline: none; resize: vertical; background: var(--bg-primary); transition: var(--transition-smooth); }
-    .reflection-form textarea:focus { border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
-    .reflection-form input[type="text"] { width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid var(--border-color); font-size: 0.92rem; font-family: inherit; outline: none; background: var(--bg-primary); }
-    .action-plan-result { margin-top: 3rem; background: var(--bg-primary); border: 2px solid var(--accent-color); border-radius: var(--border-radius); padding: 2.5rem; box-shadow: var(--glass-shadow); }
-    .action-plan-result.hidden { display: none; }
-    .plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--bg-secondary); padding-bottom: 1rem; }
-    .plan-header h3 { font-size: 1.2rem; font-weight: 800; }
-    .saved-indicator { font-size: 0.78rem; color: #28a745; font-weight: 700; }
-    .plan-preview { font-family: Menlo, Monaco, Consolas, monospace; font-size: 0.84rem; background-color: var(--bg-secondary); color: var(--text-main); padding: 1.5rem; border-radius: 12px; white-space: pre-wrap; margin-bottom: 1.5rem; line-height: 1.6; max-height: 350px; overflow-y: auto; }
-    .plan-actions { display: flex; gap: 1rem; }
-    .slide-actions { display: flex; justify-content: center; margin-top: 3rem; }
-    .primary-btn { background-color: var(--accent-color); color: #fff; border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 700; border-radius: 99px; cursor: pointer; transition: var(--transition-smooth); box-shadow: 0 4px 14px rgba(0,102,204,0.25); }
-    .primary-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,102,204,0.35); }
-    .secondary-btn { background-color: var(--bg-secondary); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.8rem 1.5rem; font-size: 0.88rem; font-weight: 600; border-radius: 10px; cursor: pointer; transition: var(--transition-smooth); }
-    .secondary-btn:hover { background-color: var(--bg-primary); border-color: var(--text-main); }
-    .app-footer { text-align: center; padding: 3rem 1.5rem; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid rgba(0,0,0,0.03); }
-    .app-footer strong { color: var(--text-main); }
-    @media (max-width: 768px) {
-      .header-container { flex-direction: column; gap: 0.75rem; }
-      .step-nav { flex-wrap: wrap; justify-content: center; }
-      .nav-divider { display: none; }
-      .slide-section { padding: 1.5rem; }
-      .concept-grid, .simulator-io, .sandbox-grid, .resources-grid, .action-timeline { grid-template-columns: 1fr; }
-      .slide-title { font-size: 1.6rem; }
-      .expanded-card { padding: 1.5rem; width: 95%; }
-      .plan-actions { flex-direction: column; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg-secondary);color:var(--text-main);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;}
+    /* Header */
+    .app-header{position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(0,0,0,.05);background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+    .header-container{max-width:1100px;margin:0 auto;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1rem;letter-spacing:-.02em;flex-shrink:0;}
+    .logo-icon{font-size:1.3rem;}
+    .logo-sub{font-size:.72rem;color:var(--text-muted);font-weight:400;}
+    .step-nav{display:flex;align-items:center;gap:.35rem;}
+    .nav-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:.35rem;padding:.4rem .8rem;border-radius:99px;transition:var(--transition);color:var(--text-muted);}
+    .nav-btn.active{background:var(--accent-soft);color:var(--accent-color);}
+    .nav-btn.active.adobe-nav{background:var(--adobe-soft);color:var(--adobe-color);}
+    .nav-btn.active.mind-nav{background:var(--amber-soft);color:var(--amber);}
+    .nav-btn:hover:not(.active){background:rgba(0,0,0,.03);color:var(--text-main);}
+    .step-num{font-size:.65rem;font-weight:700;opacity:.8;}
+    .step-label{font-size:.78rem;font-weight:500;}
+    .nav-divider{width:12px;height:1px;background:var(--border-color);opacity:.5;}
+    /* Slide */
+    .slide-canvas{flex:1;max-width:960px;width:100%;margin:2rem auto;padding:0 1.5rem;}
+    .slide-section{display:none;opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);background:var(--bg-primary);border-radius:24px;box-shadow:var(--shadow);padding:3rem;border:1px solid rgba(0,0,0,.02);}
+    .slide-section.active{display:block;opacity:1;transform:none;}
+    .concept-intro{text-align:center;margin-bottom:3rem;}
+    .badge{display:inline-block;padding:.4rem 1rem;background:var(--accent-soft);color:var(--accent-color);font-size:.75rem;font-weight:700;border-radius:99px;margin-bottom:1rem;}
+    .badge.adobe-badge{background:var(--adobe-soft);color:var(--adobe-color);}
+    .badge.mind-badge{background:var(--amber-soft);color:var(--amber);}
+    .slide-title{font-size:2rem;font-weight:800;line-height:1.3;letter-spacing:-.03em;margin-bottom:1rem;}
+    .accent-text{color:var(--accent-color);}
+    .adobe-text{color:var(--adobe-color);}
+    .amber-text{color:var(--amber);}
+    .slide-subtitle{font-size:1.05rem;color:var(--text-muted);max-width:680px;margin:0 auto;}
+    .part-divider{display:flex;align-items:center;gap:1rem;margin:2.5rem 0;font-size:.78rem;font-weight:700;color:var(--text-muted);}
+    .part-divider::before,.part-divider::after{content:'';flex:1;height:1px;background:var(--border-color);}
+    /* Cards */
+    .resources-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    .resource-card{text-decoration:none;background:var(--bg-secondary);border-radius:var(--border-radius);padding:1.75rem;border:1px solid transparent;display:flex;flex-direction:column;justify-content:space-between;min-height:210px;transition:var(--transition);}
+    .resource-card:hover{transform:translateY(-4px);background:var(--bg-primary);border-color:var(--border-color);box-shadow:var(--shadow);}
+    .resource-card.hl-blue{border-color:rgba(0,102,204,.12);}.resource-card.hl-blue:hover{border-color:var(--accent-color);}
+    .resource-card.hl-red{border-color:rgba(229,57,53,.12);}.resource-card.hl-red:hover{border-color:var(--adobe-color);}
+    .card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
+    .card-tag{font-size:.68rem;font-weight:700;padding:.22rem .55rem;border-radius:99px;}
+    .tag-ai{background:var(--accent-soft);color:var(--accent-color);}
+    .tag-adobe{background:var(--adobe-soft);color:var(--adobe-color);}
+    .tag-admin{background:rgba(142,142,147,.12);color:#555;}
+    .tag-lesson{background:rgba(52,199,89,.1);color:#1a7f34;}
+    .tag-mind{background:var(--amber-soft);color:var(--amber);}
+    .card-icon-small{font-size:1.4rem;}
+    .card-title{font-size:1.1rem;font-weight:750;margin-bottom:.5rem;color:var(--text-main);}
+    .card-summary{font-size:.86rem;color:var(--text-muted);flex-grow:1;margin-bottom:.75rem;}
+    .card-action-hint{font-size:.78rem;font-weight:600;color:var(--accent-color);}
+    .card-action-hint.adobe-hint{color:var(--adobe-color);}
+    .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;}
+    .concept-card{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;transition:var(--transition);border:1px solid transparent;}
+    .concept-card.hl-border{border-color:rgba(0,102,204,.2);}
+    .concept-card.hl-amber{border-color:rgba(180,83,9,.25);background:rgba(180,83,9,.03);}
+    .concept-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+    .card-icon{font-size:2.2rem;margin-bottom:1rem;}
+    .concept-card h2{font-size:1.15rem;font-weight:700;margin-bottom:.75rem;}
+    .concept-card p{font-size:.92rem;color:var(--text-muted);}
+    /* Simulator */
+    .simulator-box{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;margin-top:2rem;}
+    .simulator-box h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
+    .simulator-desc{font-size:.86rem;color:var(--text-muted);margin-bottom:1.5rem;}
+    .slider-container{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;background:var(--bg-primary);padding:1rem 1.5rem;border-radius:12px;}
+    .slider-label{font-size:.8rem;font-weight:600;color:var(--text-muted);flex-shrink:0;}
+    .slider-label.label-high{color:var(--accent-color);}
+    #intent-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:99px;background:var(--border-color);outline:none;}
+    #intent-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent-color);cursor:pointer;transition:var(--transition);}
+    #intent-slider::-webkit-slider-thumb:hover{transform:scale(1.15);}
+    .simulator-io{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+    .io-panel{background:var(--bg-primary);border-radius:12px;padding:1.25rem;border:1px solid rgba(0,0,0,.05);}
+    .io-panel h4{font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:.75rem;}
+    .code-view{font-family:Menlo,Monaco,Consolas,monospace;font-size:.8rem;white-space:pre-wrap;color:var(--text-main);background:var(--bg-secondary);padding:1rem;border-radius:8px;min-height:120px;}
+    /* Risk */
+    .risk-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+    .risk-item{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;border-radius:12px;border-left:4px solid;}
+    .risk-item.high{border-color:#e53935;background:rgba(229,57,53,.04);}
+    .risk-item.mid{border-color:#ff9800;background:rgba(255,152,0,.04);}
+    .risk-body h4{font-size:.95rem;font-weight:700;margin-bottom:.25rem;}
+    .risk-body p{font-size:.85rem;color:var(--text-muted);}
+    /* Mind & Machine — Cognitive Offloading */
+    .mm-theory-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    .mm-card{border-radius:var(--border-radius);padding:1.75rem;border:1px solid;}
+    .mm-card.scaffolding{border-color:#3b5bdb;border-left:4px solid #3b5bdb;background:rgba(59,91,219,.03);}
+    .mm-card.expertise{border-color:#e67700;border-left:4px solid #e67700;background:rgba(230,119,0,.05);}
+    .mm-card h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;}
+    .mm-card.scaffolding h3{color:#3b5bdb;}
+    .mm-card.expertise h3{color:#e67700;}
+    .mm-card p{font-size:.88rem;color:var(--text-muted);line-height:1.7;}
+    /* Radar Chart */
+    .radar-box{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;margin-bottom:2rem;}
+    .radar-title{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:1.5rem;}
+    .radar-wrap{display:flex;justify-content:center;align-items:center;}
+    .radar-mode-btns{display:flex;justify-content:center;gap:.75rem;margin-top:1.25rem;}
+    .radar-btn{padding:.45rem 1.1rem;border-radius:99px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-muted);transition:var(--transition);}
+    .radar-btn.active{background:var(--text-main);color:#fff;border-color:var(--text-main);}
+    /* Audit Tool */
+    .audit-box{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;margin-bottom:2rem;}
+    .audit-box h3{font-size:1.15rem;font-weight:700;margin-bottom:.35rem;}
+    .audit-note{font-size:.82rem;color:var(--text-muted);margin-bottom:1.75rem;}
+    .audit-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+    .audit-sliders{display:flex;flex-direction:column;gap:1.5rem;}
+    .audit-slider-group label{font-size:.88rem;font-weight:700;display:flex;justify-content:space-between;margin-bottom:.5rem;}
+    .audit-slider-group .slider-val{font-weight:700;color:var(--accent-color);}
+    .slider-range-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);margin-top:.25rem;}
+    .audit-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:99px;background:var(--border-color);outline:none;cursor:pointer;}
+    .audit-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent-color);cursor:pointer;}
+    .audit-result{background:var(--bg-primary);border-radius:var(--border-radius);padding:1.5rem;border:1px solid rgba(0,0,0,.06);}
+    .audit-result-badge{font-size:.72rem;font-weight:700;padding:.3rem .8rem;border-radius:99px;display:inline-block;margin-bottom:.75rem;}
+    .badge-good{background:rgba(52,199,89,.15);color:#1a7f34;}
+    .badge-warn{background:rgba(255,152,0,.15);color:#92400e;}
+    .badge-danger{background:rgba(229,57,53,.15);color:#991b1b;}
+    .audit-result h4{font-size:1.1rem;font-weight:800;margin-bottom:.75rem;}
+    .audit-result p{font-size:.88rem;color:var(--text-muted);line-height:1.7;}
+    .audit-bar-wrap{margin-top:1rem;}
+    .audit-bar-track{height:8px;background:linear-gradient(to right,#93c5fd,#3b82f6,#f97316);border-radius:99px;position:relative;}
+    .audit-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #3b82f6;transition:left .3s ease;}
+    .audit-bar-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);margin-top:.35rem;}
+    .audit-hint{background:rgba(59,91,219,.06);border-radius:12px;padding:1rem 1.25rem;margin-top:1.25rem;font-size:.83rem;color:#3b5bdb;line-height:1.65;}
+    /* Strategy Cards */
+    .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    .strategy-card{background:var(--bg-primary);border-radius:var(--border-radius);padding:1.75rem;border:1px solid var(--border-color);transition:var(--transition);}
+    .strategy-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+    .strategy-card h3{font-size:1rem;font-weight:700;margin-bottom:.75rem;}
+    .strategy-card p{font-size:.88rem;color:var(--text-muted);line-height:1.7;}
+    /* Sandbox */
+    .sandbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;margin-bottom:3rem;}
+    .sandbox-card{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2rem;border:1px solid transparent;cursor:pointer;text-align:left;transition:var(--transition);display:flex;flex-direction:column;justify-content:space-between;min-height:195px;}
+    .sandbox-card:hover{transform:translateY(-4px);background:var(--bg-primary);border-color:var(--border-color);box-shadow:var(--shadow);}
+    /* Magic Move */
+    .magic-move-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000;display:flex;justify-content:center;align-items:center;visibility:hidden;opacity:0;transition:visibility .4s,opacity .4s ease;}
+    .magic-move-overlay.visible{visibility:visible;opacity:1;}
+    .overlay-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(29,29,31,.4);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);}
+    .expanded-card{position:relative;background:var(--bg-primary);width:90%;max-width:780px;max-height:85vh;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.15);overflow-y:auto;z-index:1010;padding:3rem;transform:scale(.95);transition:transform .5s cubic-bezier(.16,1,.3,1);}
+    .magic-move-overlay.visible .expanded-card{transform:scale(1);}
+    .close-overlay-btn{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;border-radius:50%;background:var(--bg-secondary);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;transition:var(--transition);}
+    .close-overlay-btn:hover{background:var(--border-color);transform:rotate(90deg);}
+    .expanded-header{margin-bottom:2rem;border-bottom:1px solid var(--bg-secondary);padding-bottom:1.5rem;}
+    .expanded-badge-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.75rem;}
+    .expanded-title{font-size:1.7rem;font-weight:800;margin-bottom:.5rem;}
+    .expanded-desc{color:var(--text-muted);font-size:.95rem;}
+    .expanded-section{margin-bottom:2rem;}
+    .expanded-section h3{font-size:.95rem;font-weight:700;margin-bottom:.75rem;}
+    .intent-question-card{background:var(--accent-soft);border-left:4px solid var(--accent-color);padding:1.1rem 1.4rem;border-radius:0 12px 12px 0;margin-bottom:1rem;}
+    .intent-question-card p{font-size:.92rem;font-weight:600;}
+    .sandbox-textarea{width:100%;min-height:90px;border-radius:12px;border:1px solid var(--border-color);padding:1rem;font-size:.92rem;font-family:inherit;outline:none;resize:vertical;background:var(--bg-secondary);transition:var(--transition);margin-bottom:1rem;}
+    .sandbox-textarea:focus{border-color:var(--accent-color);background:var(--bg-primary);box-shadow:0 0 0 3px rgba(0,102,204,.1);}
+    .prompt-output-container{position:relative;}
+    .copy-badge-btn{position:absolute;top:.75rem;right:.75rem;background:var(--accent-color);color:#fff;border:none;padding:.4rem .8rem;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;}
+    .prompt-view{font-family:Menlo,Monaco,Consolas,monospace;font-size:.8rem;background:#1d1d1f;color:#f5f5f7;padding:1.5rem;border-radius:12px;white-space:pre-wrap;min-height:150px;}
+    /* Table */
+    .info-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1.5rem;}
+    .info-table th{background:var(--text-main);color:var(--bg-primary);text-align:left;padding:.7rem 1rem;font-weight:600;}
+    .info-table td{padding:.65rem 1rem;border-bottom:1px solid var(--bg-secondary);}
+    .info-table tr:nth-child(even) td{background:var(--bg-secondary);}
+    /* Timeline */
+    .action-timeline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    .timeline-card{background:var(--bg-secondary);border-radius:var(--border-radius);padding:1.5rem;}
+    .timeline-when{font-size:.68rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+    .timeline-icon{font-size:1.8rem;margin-bottom:.75rem;}
+    .timeline-card ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+    .timeline-card li{font-size:.85rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:.4rem;}
+    .timeline-card li::before{content:'•';color:var(--accent-color);flex-shrink:0;}
+    /* Reflection */
+    .reflection-form{background:var(--bg-secondary);border-radius:var(--border-radius);padding:2.5rem;}
+    .form-group{margin-bottom:2rem;}
+    .form-group label{display:block;font-weight:700;font-size:.96rem;margin-bottom:.75rem;}
+    .label-badge{display:inline-block;background:var(--text-main);color:var(--bg-primary);font-size:.68rem;padding:.15rem .5rem;border-radius:4px;margin-right:.5rem;}
+    .reflection-form textarea{width:100%;min-height:110px;border-radius:12px;border:1px solid var(--border-color);padding:1rem;font-size:.92rem;font-family:inherit;outline:none;resize:vertical;background:var(--bg-primary);transition:var(--transition);}
+    .reflection-form textarea:focus{border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(0,102,204,.1);}
+    .reflection-form input[type="text"]{width:100%;padding:.8rem 1rem;border-radius:10px;border:1px solid var(--border-color);font-size:.92rem;font-family:inherit;outline:none;background:var(--bg-primary);}
+    .action-plan-result{margin-top:3rem;background:var(--bg-primary);border:2px solid var(--accent-color);border-radius:var(--border-radius);padding:2.5rem;box-shadow:var(--shadow);}
+    .action-plan-result.hidden{display:none;}
+    .plan-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;border-bottom:1px solid var(--bg-secondary);padding-bottom:1rem;}
+    .plan-header h3{font-size:1.2rem;font-weight:800;}
+    .saved-indicator{font-size:.78rem;color:#28a745;font-weight:700;}
+    .plan-preview{font-family:Menlo,Monaco,Consolas,monospace;font-size:.84rem;background:var(--bg-secondary);color:var(--text-main);padding:1.5rem;border-radius:12px;white-space:pre-wrap;margin-bottom:1.5rem;line-height:1.6;max-height:350px;overflow-y:auto;}
+    .plan-actions{display:flex;gap:1rem;}
+    /* Buttons */
+    .slide-actions{display:flex;justify-content:center;margin-top:3rem;}
+    .primary-btn{background:var(--accent-color);color:#fff;border:none;padding:1rem 2rem;font-size:1rem;font-weight:700;border-radius:99px;cursor:pointer;transition:var(--transition);box-shadow:0 4px 14px rgba(0,102,204,.25);}
+    .primary-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,102,204,.35);}
+    .secondary-btn{background:var(--bg-secondary);color:var(--text-main);border:1px solid var(--border-color);padding:.8rem 1.5rem;font-size:.88rem;font-weight:600;border-radius:10px;cursor:pointer;transition:var(--transition);}
+    .secondary-btn:hover{background:var(--bg-primary);border-color:var(--text-main);}
+    .app-footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--text-muted);border-top:1px solid rgba(0,0,0,.03);}
+    .app-footer strong{color:var(--text-main);}
+    @media(max-width:768px){
+      .header-container{flex-direction:column;gap:.75rem;}
+      .step-nav{flex-wrap:wrap;justify-content:center;}
+      .nav-divider{display:none;}
+      .slide-section{padding:1.5rem;}
+      .concept-grid,.simulator-io,.sandbox-grid,.resources-grid,.action-timeline,.mm-theory-grid,.audit-layout,.strategy-grid{grid-template-columns:1fr;}
+      .slide-title{font-size:1.6rem;}
+      .expanded-card{padding:1.5rem;width:95%;}
+      .plan-actions{flex-direction:column;}
     }
   </style>
 </head>
@@ -228,11 +235,13 @@
       <div class="nav-divider"></div>
       <button class="nav-btn" data-step="2"><span class="step-num">02</span><span class="step-label">生成AI時代の学校</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn" data-step="3"><span class="step-num">03</span><span class="step-label">プロンプト体験</span></button>
+      <button class="nav-btn mind-nav" data-step="3"><span class="step-num">03</span><span class="step-label">認知オフロード</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn adobe-nav" data-step="4"><span class="step-num">04</span><span class="step-label">Adobe × Creativity</span></button>
+      <button class="nav-btn" data-step="4"><span class="step-num">04</span><span class="step-label">プロンプト体験</span></button>
       <div class="nav-divider"></div>
-      <button class="nav-btn" data-step="5"><span class="step-num">05</span><span class="step-label">アクションプラン</span></button>
+      <button class="nav-btn adobe-nav" data-step="5"><span class="step-num">05</span><span class="step-label">Adobe × Creativity</span></button>
+      <div class="nav-divider"></div>
+      <button class="nav-btn" data-step="6"><span class="step-num">06</span><span class="step-label">アクションプラン</span></button>
     </nav>
   </div>
 </header>
@@ -247,19 +256,19 @@
       <p class="slide-subtitle">研修開始前に、以下のリンクを開いて準備しましょう。スマートフォンでもアクセスできます。</p>
     </div>
     <div class="resources-grid">
-      <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="resource-card highlight-blue">
+      <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="resource-card hl-blue">
         <div class="card-meta"><span class="card-tag tag-ai">生成AI体験</span><span class="card-icon-small">🤖</span></div>
         <h2 class="card-title">Claude（生成AI）</h2>
         <p class="card-summary">Anthropic社の生成AI。今日の研修で実際に使います。アカウント不要で試用できます。</p>
         <div class="card-action-hint">claude.ai を開く ➔</div>
       </a>
-      <a href="https://express.adobe.com" target="_blank" rel="noopener noreferrer" class="resource-card highlight-red">
+      <a href="https://express.adobe.com" target="_blank" rel="noopener noreferrer" class="resource-card hl-red">
         <div class="card-meta"><span class="card-tag tag-adobe">Adobe</span><span class="card-icon-small">✨</span></div>
         <h2 class="card-title">Adobe Express</h2>
         <p class="card-summary">ポスター・チラシ・スライドをブラウザで簡単作成。無料アカウントで今すぐ使えます。</p>
         <div class="card-action-hint adobe-hint">express.adobe.com を開く ➔</div>
       </a>
-      <a href="https://firefly.adobe.com" target="_blank" rel="noopener noreferrer" class="resource-card highlight-red">
+      <a href="https://firefly.adobe.com" target="_blank" rel="noopener noreferrer" class="resource-card hl-red">
         <div class="card-meta"><span class="card-tag tag-adobe">Adobe Firefly</span><span class="card-icon-small">🔥</span></div>
         <h2 class="card-title">Adobe Firefly</h2>
         <p class="card-summary">テキストから画像を生成するAdobe公式AI。著作権クリアな素材で安心して使えます。</p>
@@ -270,13 +279,11 @@
     <table class="info-table">
       <thead><tr><th>時間</th><th>内容</th><th>形式</th></tr></thead>
       <tbody>
-        <tr><td>第一部（60分）</td><td>生成AI時代の学校 — 現状・活用・リスク・体験</td><td>講義 + ハンズオン</td></tr>
+        <tr><td>第一部（60分）</td><td>生成AI時代の学校 — 現状・認知オフロード・リスク・体験</td><td>講義 + ハンズオン</td></tr>
         <tr><td>第二部（60分）</td><td>AdobeツールでCreativityをアクセラレートしよう！</td><td>デモ + ワークショップ</td></tr>
       </tbody>
     </table>
-    <div class="slide-actions">
-      <button class="primary-btn next-step-btn" data-target="2">次へ進む: 生成AI時代の学校 ➔</button>
-    </div>
+    <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="2">次へ進む: 生成AI時代の学校 ➔</button></div>
   </section>
 
   <!-- STEP 2 -->
@@ -292,7 +299,7 @@
         <h2>眼鏡 A：優秀な部下・新人</h2>
         <p>指示が曖昧だと、無難で平均的な答えしか返せません。しかし明確な文脈と役割を与えれば、24時間稼働する超優秀な作業パートナーになります。</p>
       </article>
-      <article class="concept-card highlight-border">
+      <article class="concept-card hl-border">
         <div class="card-icon">🪞</div>
         <h2>眼鏡 B：思考の鏡（Brain First）</h2>
         <p>AIとの対話は、自分の「本当の教育意図」を言語化するプロセスです。主役は常に「あなたの脳」。AIはそれを加速・増幅するツールです。</p>
@@ -303,7 +310,7 @@
       <p class="simulator-desc">プロンプトの「意図の解像度」をスライダーで動かして、AIの回答がどう変わるか体感しましょう。</p>
       <div class="slider-container">
         <span class="slider-label">曖昧な指示</span>
-        <input type="range" id="intent-slider" min="1" max="3" value="1" aria-label="意図の解像度">
+        <input type="range" id="intent-slider" min="1" max="3" value="1">
         <span class="slider-label label-high">解像度の高い意図</span>
       </div>
       <div class="simulator-io">
@@ -326,15 +333,98 @@
         <div class="risk-body"><h4>依存・思考停止</h4><p>AIの回答をそのまま使い続けると思考力が低下する。「最初の一手」として使い、必ず自分の言葉で編集・判断する。</p></div>
       </div>
     </div>
-    <div class="slide-actions">
-      <button class="primary-btn next-step-btn" data-target="3">次へ進む: プロンプト体験 ➔</button>
-    </div>
+    <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="3">次へ進む: 認知オフロードと授業デザイン ➔</button></div>
   </section>
 
-  <!-- STEP 3 -->
+  <!-- STEP 3: 認知オフロード (Mind & Machine) -->
   <section class="slide-section" id="slide-3">
     <div class="concept-intro">
-      <span class="badge">Step 03 : Sandbox</span>
+      <span class="badge mind-badge">Step 03 : Mind &amp; Machine</span>
+      <h1 class="slide-title">認知オフロードと<br><span class="amber-text">生成AI時代の授業デザイン</span></h1>
+      <p class="slide-subtitle">「教えること」と「AIに任せること」の境界線をどこに引くべきか。<br>鍵は、<strong>既有知識（Prior Knowledge）</strong>と<strong>外部支援（Cognitive Offloading）</strong>のバランスにある。</p>
+    </div>
+
+    <div class="mm-theory-grid">
+      <div class="mm-card scaffolding">
+        <h3>Scaffolding（足場かけ）</h3>
+        <p>学習者が自力では到達できない「発達の最近接領域（ZPD）」の課題を、AIが一時的に支援することで達成可能にする。知識がつくにつれてAIの支援を減らす（フェーディング）のが理想。</p>
+      </div>
+      <div class="mm-card expertise">
+        <h3>Expertise Reversal Effect</h3>
+        <p>初学者には有益な支援も、熟達者にとっては既に内在化されている知識と干渉し、逆に学習効率を下げたり、単なる「サボり」になってしまう現象。</p>
+      </div>
+    </div>
+
+    <div class="part-divider">認知プロセス変容の可視化</div>
+
+    <div class="radar-box">
+      <div class="radar-title">AIの関与による認知プロセスへの影響</div>
+      <div class="radar-wrap">
+        <canvas id="radarChart" width="420" height="300"></canvas>
+      </div>
+      <div class="radar-mode-btns">
+        <button class="radar-btn active" data-mode="traditional">Traditional</button>
+        <button class="radar-btn" data-mode="balanced">Balanced</button>
+        <button class="radar-btn" data-mode="atrophy">Atrophy Risk</button>
+      </div>
+    </div>
+
+    <div class="part-divider">Offloading Audit：授業設計診断</div>
+
+    <div class="audit-box">
+      <h3>Offloading Audit v2.0</h3>
+      <p class="audit-note">※ 学習者の知識レベルに応じて、最適なAI支援の量は変動します。</p>
+      <div class="audit-layout">
+        <div class="audit-sliders">
+          <div class="audit-slider-group">
+            <label>学習者の既有知識レベル <span class="slider-val" id="know-label">初学者</span></label>
+            <input type="range" class="audit-slider" id="know-slider" min="0" max="100" value="20">
+            <div class="slider-range-labels"><span>全く知らない</span><span>基礎はある</span><span>専門家レベル</span></div>
+          </div>
+          <div class="audit-slider-group">
+            <label>課題の複雑性 <span class="slider-val" id="complex-label">複雑</span></label>
+            <input type="range" class="audit-slider" id="complex-slider" min="0" max="100" value="60">
+            <div class="slider-range-labels"><span>単純・定型</span><span>応用的</span><span>未解決の難問</span></div>
+          </div>
+          <div class="audit-slider-group">
+            <label>AI利用によるオフロード量 <span class="slider-val" id="ai-label">補助</span></label>
+            <input type="range" class="audit-slider" id="ai-slider" min="0" max="100" value="30">
+            <div class="slider-range-labels"><span>自力のみ</span><span>ヒント・構成案</span><span>丸投げ・全自動</span></div>
+          </div>
+          <div class="audit-hint">💡 <strong>ヒント：</strong>「知識レベル」を最大にして「AI利用」も最大にしてみてください。熟達者の場合、それは「効率的なオフロード（適応的利用）」として肯定的に評価されます。逆に「知識レベル」を最小にして「AI利用」を最大にすると、学習機会の喪失として強い警告が出ます。</div>
+        </div>
+        <div class="audit-result" id="audit-result">
+          <span class="audit-result-badge badge-good" id="audit-badge">GOOD BALANCE</span>
+          <h4 id="audit-title">最適な足場かけ (Scaffolding)</h4>
+          <p id="audit-desc">AIが学習者の『できない部分』を適切に補っています。この支援があることで、学習者は本来一人では到達できない高次の目標に取り組むことができています。フェーディング（徐々に支援を減らす）を意識しましょう。</p>
+          <div class="audit-bar-wrap">
+            <div class="audit-bar-track"><div class="audit-bar-thumb" id="audit-thumb"></div></div>
+            <div class="audit-bar-labels"><span>負荷不足</span><span>最適な学習ゾーン</span><span>過負荷 / 代行</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="part-divider">2つの授業デザイン戦略</div>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <h3>🪜 Fading Scaffold（消えていく足場）</h3>
+        <p>最初はAIに構成を練らせるが、学期後半はAI利用を禁止し、内在化された知識をテストする。支援を「徐々に外す」設計が学習の定着につながる。</p>
+      </div>
+      <div class="strategy-card">
+        <h3>🎯 High-Road Transfer（高次への転移）</h3>
+        <p>計算や翻訳などの「低次スキル」をAIに完全にオフロードし、浮いた認知資源で「批判的吟味」という高次スキルを訓練する。AIで「何を空けるか」を設計する。</p>
+      </div>
+    </div>
+
+    <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="4">次へ進む: プロンプト体験 ➔</button></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="slide-section" id="slide-4">
+    <div class="concept-intro">
+      <span class="badge">Step 04 : Sandbox</span>
       <h1 class="slide-title">思考から始めるプロンプト・サンドボックス</h1>
       <p class="slide-subtitle">「まず自分がどうしたいか（意図）」からスタートします。<br>カードを選んで、あなただけのプロンプトを生成しましょう。</p>
     </div>
@@ -364,15 +454,13 @@
         <div class="card-action-hint">クリックして展開</div>
       </button>
     </div>
-    <div class="slide-actions">
-      <button class="primary-btn next-step-btn" data-target="4">次へ進む: Adobe × Creativity ➔</button>
-    </div>
+    <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="5">次へ進む: Adobe × Creativity ➔</button></div>
   </section>
 
-  <!-- STEP 4 -->
-  <section class="slide-section" id="slide-4">
+  <!-- STEP 5 -->
+  <section class="slide-section" id="slide-5">
     <div class="concept-intro">
-      <span class="badge adobe-badge">Step 04 : Part 2</span>
+      <span class="badge adobe-badge">Step 05 : Part 2</span>
       <h1 class="slide-title"><span class="adobe-text">Adobe</span>ツールで<br>Creativityをアクセラレートしよう！</h1>
       <p class="slide-subtitle">創造性（Creativity）は教科を問わず必要なコンピテンシー。<br>ツールを使いこなして、生徒の「表現の場」を広げましょう。</p>
     </div>
@@ -382,7 +470,7 @@
         <h2>Adobe Express</h2>
         <p>テンプレートから選ぶだけでプロ品質のビジュアルが完成。ポスター・スライド・動画・SNS投稿すべてブラウザで作れます。授業の成果物づくりに最適。</p>
       </article>
-      <article class="concept-card" style="border-color: rgba(229,57,53,0.2);">
+      <article class="concept-card" style="border-color:rgba(229,57,53,.2);">
         <div class="card-icon">🔥</div>
         <h2>Adobe Firefly</h2>
         <p>著作権クリアな素材でトレーニングされた画像生成AI。日本語プロンプトに対応。生成した画像はExpressに読み込んでポスター制作に活かせます。</p>
@@ -404,38 +492,26 @@
       <div class="timeline-card">
         <div class="timeline-when">Step 1 — 2分</div>
         <div class="timeline-icon">🎯</div>
-        <ul>
-          <li>自分の担当教科で「生徒に作らせたいもの」を1つ決める</li>
-          <li>テーマ・対象学年・伝えたいことをメモ</li>
-        </ul>
+        <ul><li>担当教科で「生徒に作らせたいもの」を1つ決める</li><li>テーマ・対象学年・伝えたいことをメモ</li></ul>
       </div>
       <div class="timeline-card">
         <div class="timeline-when">Step 2 — 3分</div>
         <div class="timeline-icon">🔥</div>
-        <ul>
-          <li>firefly.adobe.com でテーマに合った背景画像を生成</li>
-          <li>日本語プロンプトで複数試してみる</li>
-        </ul>
+        <ul><li>firefly.adobe.com でテーマに合った背景画像を生成</li><li>日本語プロンプトで複数試してみる</li></ul>
       </div>
       <div class="timeline-card">
         <div class="timeline-when">Step 3 — 10分</div>
         <div class="timeline-icon">✨</div>
-        <ul>
-          <li>express.adobe.com でテンプレートを選択</li>
-          <li>生成画像を使いながらポスターを完成</li>
-          <li>隣の先生に見せて感想を共有</li>
-        </ul>
+        <ul><li>express.adobe.com でテンプレートを選択</li><li>生成画像を使いながらポスターを完成</li><li>隣の先生に見せて感想を共有</li></ul>
       </div>
     </div>
-    <div class="slide-actions">
-      <button class="primary-btn next-step-btn" data-target="5">次へ進む: アクションプラン ➔</button>
-    </div>
+    <div class="slide-actions"><button class="primary-btn next-step-btn" data-target="6">次へ進む: アクションプラン ➔</button></div>
   </section>
 
-  <!-- STEP 5 -->
-  <section class="slide-section" id="slide-5">
+  <!-- STEP 6 -->
+  <section class="slide-section" id="slide-6">
     <div class="concept-intro">
-      <span class="badge">Step 05 : Reflection</span>
+      <span class="badge">Step 06 : Reflection</span>
       <h1 class="slide-title">明日からの「AI共創アクションプラン」</h1>
       <p class="slide-subtitle">今日の研修を終えて、あなたの授業・校務にどう組み込みますか？<br>自分の言葉で思考を言語化しましょう。</p>
     </div>
@@ -445,8 +521,8 @@
         <textarea id="ref-intent" placeholder="例：期末テスト前の生徒が、点数だけでなく学びのプロセスに自信を持てるような学級だよりを書きたい。そのために生成AIを使って最初の草稿を作り、自分で温かみを加えたい。"></textarea>
       </div>
       <div class="form-group">
-        <label for="ref-method"><span class="label-badge">問 2</span>生成AIやAdobeツールを<strong>「思考の鏡・相棒」</strong>としてどのように活用しますか？</label>
-        <textarea id="ref-method" placeholder="例：Adobe Expressで探究発表のポスターを生徒に作らせる単元を設計する。Fireflyで背景画像を生成させ、自分なりのデザインで仕上げさせることで創造性と情報発信力を育てたい。"></textarea>
+        <label for="ref-method"><span class="label-badge">問 2</span>認知オフロードの観点から、AIの支援を<strong>「どこまで・どのタイミングで」</strong>使いますか？（Fading Scaffold / High-Road Transfer の視点で）</label>
+        <textarea id="ref-method" placeholder="例：最初の2週間はAIで構成案を作らせ、3週目からは自力で書かせる（Fading Scaffold）。Adobe Expressで探究発表のポスターを生徒に作らせる単元を設計し、デザイン作業はAIに任せて批判的思考の時間を増やす（High-Road Transfer）。"></textarea>
       </div>
       <div class="form-group">
         <label for="ref-teacher-name">執筆者（お名前）</label>
@@ -457,7 +533,7 @@
     <div class="action-plan-result hidden" id="action-plan-result">
       <div class="plan-header">
         <h3>📝 生成されたアクションプラン</h3>
-        <span class="saved-indicator" id="saved-indicator">✓ ブラウザに自動保存されました</span>
+        <span class="saved-indicator">✓ ブラウザに自動保存されました</span>
       </div>
       <pre id="plan-output-text" class="plan-preview"></pre>
       <div class="plan-actions">
@@ -483,77 +559,160 @@
 </footer>
 
 <script>
+// ===== Data =====
 const simulatorData = {
-  1: { input: "授業案を書いてください。", output: "【授業案】\n単元名：〇〇\n目標：〜について理解する。\n導入（5分）：前回の復習\n展開（35分）：教師による説明\nまとめ（10分）：振り返りシート記入" },
-  2: { input: "高校2年生の現代文で「語り手と視点」の授業案を作ってください。グループ活動を含めてください。", output: "【現代文 授業案：語り手と視点】\n■目標：語り手の違いによって読者の印象がどう変わるかを理解し、作品を多角的に分析できる。\n■導入（5分）：同じ場面を「一人称」と「三人称」で書き分けた短文を提示。どちらが心に響くか挙手で確認。\n■展開（30分）：グループで担当箇所の語り手を特定し、語り手を変えたバージョンを口頭で考える。\n■まとめ（10分）：各グループの考察をシェア。" },
-  3: { input: "【私の意図】語り手の視点が変わると登場人物の心理描写も変わることを「体感」として理解してほしい。単なる知識で終わらせず、自分の作文にも活かせる感覚を掴んでほしい。\n【担当】高校2年国語\n【条件】グループ活動20分・生徒が書く活動を含める", output: "【現代文 授業案：視点の「体感」ワーク】\n■本時のゴール：語り手を変えることで同一場面が「別の物語」に変容することを、書く体験を通じて実感する。\n■導入（5分）：「夕焼けを見ている少女」の場面を①少女視点・②通行人視点で音読。「どう違った？」を問う。\n■展開①（10分）：教科書の一場面を選び、語り手と登場人物の関係を図で整理。\n■展開②（20分）：[書く活動] 同じ場面を「語り手を変えて」100字で書き直す。→グループで読み合い、変化を言語化。\n■まとめ（15分）：「語り手の選択」は作家の意図であることを確認。振り返り欄に記入。" }
+  1:{input:"授業案を書いてください。",output:"【授業案】\n単元名：〇〇\n目標：〜について理解する。\n導入（5分）：前回の復習\n展開（35分）：教師による説明\nまとめ（10分）：振り返りシート記入"},
+  2:{input:"高校2年生の現代文で「語り手と視点」の授業案を作ってください。グループ活動を含めてください。",output:"【現代文 授業案：語り手と視点】\n■目標：語り手の違いによって読者の印象がどう変わるかを理解し、作品を多角的に分析できる。\n■導入（5分）：同じ場面を「一人称」と「三人称」で書き分けた短文を提示。\n■展開（30分）：グループで担当箇所の語り手を特定し、語り手を変えたバージョンを口頭で考える。\n■まとめ（10分）：各グループの考察をシェア。"},
+  3:{input:"【私の意図】語り手の視点が変わると登場人物の心理描写も変わることを「体感」として理解してほしい。自分の作文にも活かせる感覚を掴んでほしい。\n【担当】高校2年国語\n【条件】グループ活動20分・生徒が書く活動を含める",output:"【現代文 授業案：視点の「体感」ワーク】\n■本時のゴール：語り手を変えることで同一場面が「別の物語」に変容することを、書く体験を通じて実感する。\n■導入（5分）：「夕焼けを見ている少女」を①少女視点・②通行人視点で音読。「どう違った？」を問う。\n■展開①（10分）：教科書の一場面を選び、語り手と登場人物の関係を図で整理。\n■展開②（20分）：同じ場面を「語り手を変えて」100字で書き直す→グループで読み合い言語化。\n■まとめ（15分）：「語り手の選択」は作家の意図であることを確認。振り返り欄に記入。"}
 };
 
 const promptCards = {
-  newsletter: {
-    title: "学級だよりの作成・添削", icon: "📝", tag: "校務効率化", tagClass: "tag-admin",
-    desc: "保護者に伝えたい教育意図を、温かく伝わる文章に整えます。",
-    intentQuestion: "この学級だよりを通じて、保護者に「最も伝えたい子どもの姿や教育意図」は何ですか？",
-    defaultIntent: "中間テストで点数が伸び悩んだ生徒にも、努力したプロセス自体を誇りに思ってほしい。保護者と一緒に「結果だけでなく過程を見る目」を育てたいというメッセージを届けたい。",
-    template: (i) => `【前提と役割】\nあなたは八幡浜高校の温かく生徒思いの学級担任です。\n\n【私の教育意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図に基づき、保護者向けの「学級だより」のコラム記事を1つ作成してください。\n\n【出力の条件】\n- タイトルは温かく読者の心を動かすものにしてください\n- 押し付けがましくなく、生徒の葛藤や小さな努力に寄り添うトーンで\n- 400〜600字程度`
-  },
-  lesson: {
-    title: "授業案・発問づくり", icon: "📚", tag: "授業デザイン", tagClass: "tag-lesson",
-    desc: "生徒が「なぜ？」と考えたくなる発問と授業の流れを一緒に作ります。",
-    intentQuestion: "この授業で生徒に「体感」させたいこと・気づかせたいことは何ですか？どんな授業の姿をイメージしていますか？",
-    defaultIntent: "公民の授業で「表現の自由」の限界について考えさせたい。正解を教えるのではなく、生徒が「自分はどこまで許容できるか」を他者と対話しながら自分の言葉で言語化できるようにしたい。",
-    template: (i) => `【前提と役割】\nあなたはアクティブ・ラーニングを取り入れている高校の熱心な教諭です。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図を実現する45分の授業案を作成してください。\n\n【出力の構成】\n1. 本時のゴール（生徒が授業後に言えること）\n2. 導入（5〜10分）：生徒の知的好奇心に火をつける問いかけ\n3. 展開（25〜30分）：対話・協働を含む活動\n4. まとめ（5〜10分）：振り返りの問い`
-  },
-  feedback: {
-    title: "生徒へのフィードバックコメント", icon: "💬", tag: "校務効率化", tagClass: "tag-admin",
-    desc: "テスト後・作品提出後の個別フィードバック文のテンプレートを作成します。",
-    intentQuestion: "フィードバックを受け取る生徒の状況と、あなたが最も伝えたいメッセージは何ですか？",
-    defaultIntent: "小論文を提出した生徒に、テーマへの着眼点は良かったが根拠の具体性が不足していることを伝えたい。傷つけず、次に向けて前向きになれるコメントを書きたい。",
-    template: (i) => `【前提と役割】\nあなたは生徒一人ひとりの成長を支える丁寧なフィードバックを心がける高校教諭です。\n\n【生徒の状況と伝えたいこと（Human Intent）】\n${i}\n\n【タスク】\n個別フィードバックコメントを3パターン作成してください。\n\n【出力の条件】\n- パターンA：良かった点を前面に出した肯定的フィードバック\n- パターンB：改善点を具体的に示す成長志向フィードバック\n- パターンC：次の目標設定を促すコーチング型フィードバック\n- 各100〜150字程度`
-  },
-  quiz: {
-    title: "導入クイズ・アイスブレイク", icon: "💡", tag: "授業デザイン", tagClass: "tag-lesson",
-    desc: "生徒の知的好奇心に火をつける、驚きのある導入クイズを作成します。",
-    intentQuestion: "この授業のテーマは何ですか？生徒に「えっ！そうなの？」と驚いてほしい本質的な問いは何ですか？",
-    defaultIntent: "数学の確率の授業。直感と計算結果が大きくズレる事例（誕生日のパラドックスなど）を使って「数学って面白い」と思わせる導入をしたい。",
-    template: (i) => `【前提と役割】\nあなたは生徒を惹きつける授業導入のプロフェッショナルです。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n授業最初の5分で実施する「導入用3択クイズ」を1問作成してください。\n\n【出力の条件】\n- クイズ問題文（直感を裏切る少し意外なもの）\n- 選択肢A・B・C\n- 正解の解説（なぜこのテーマが大切かを含む）\n- 知的好奇心を刺激する一言締め`
-  }
+  newsletter:{title:"学級だよりの作成・添削",icon:"📝",tag:"校務効率化",tagClass:"tag-admin",desc:"保護者に伝えたい教育意図を、温かく伝わる文章に整えます。",intentQuestion:"この学級だよりを通じて、保護者に「最も伝えたい子どもの姿や教育意図」は何ですか？",defaultIntent:"中間テストで点数が伸び悩んだ生徒にも、努力したプロセス自体を誇りに思ってほしい。保護者と一緒に「結果だけでなく過程を見る目」を育てたいというメッセージを届けたい。",template:i=>`【前提と役割】\nあなたは八幡浜高校の温かく生徒思いの学級担任です。\n\n【私の教育意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図に基づき、保護者向けの「学級だより」のコラム記事を1つ作成してください。\n\n【出力の条件】\n- タイトルは温かく読者の心を動かすものにしてください\n- 押し付けがましくなく、生徒の葛藤や小さな努力に寄り添うトーンで\n- 400〜600字程度`},
+  lesson:{title:"授業案・発問づくり",icon:"📚",tag:"授業デザイン",tagClass:"tag-lesson",desc:"生徒が「なぜ？」と考えたくなる発問と授業の流れを一緒に作ります。",intentQuestion:"この授業で生徒に「体感」させたいこと・気づかせたいことは何ですか？",defaultIntent:"公民の授業で「表現の自由」の限界について考えさせたい。正解を教えるのではなく、生徒が「自分はどこまで許容できるか」を他者と対話しながら言語化できるようにしたい。",template:i=>`【前提と役割】\nあなたはアクティブ・ラーニングを取り入れている高校の熱心な教諭です。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n上記の意図を実現する45分の授業案を作成してください。\n\n【出力の構成】\n1. 本時のゴール（生徒が授業後に言えること）\n2. 導入（5〜10分）：生徒の知的好奇心に火をつける問いかけ\n3. 展開（25〜30分）：対話・協働を含む活動\n4. まとめ（5〜10分）：振り返りの問い`},
+  feedback:{title:"生徒へのフィードバックコメント",icon:"💬",tag:"校務効率化",tagClass:"tag-admin",desc:"テスト後・作品提出後の個別フィードバック文のテンプレートを作成します。",intentQuestion:"フィードバックを受け取る生徒の状況と、あなたが最も伝えたいメッセージは何ですか？",defaultIntent:"小論文を提出した生徒に、テーマへの着眼点は良かったが根拠の具体性が不足していることを伝えたい。傷つけず、次に向けて前向きになれるコメントを書きたい。",template:i=>`【前提と役割】\nあなたは生徒一人ひとりの成長を支える丁寧なフィードバックを心がける高校教諭です。\n\n【生徒の状況と伝えたいこと（Human Intent）】\n${i}\n\n【タスク】\n個別フィードバックコメントを3パターン作成してください。\n\n- パターンA：良かった点を前面に出した肯定的フィードバック\n- パターンB：改善点を具体的に示す成長志向フィードバック\n- パターンC：次の目標設定を促すコーチング型フィードバック\n- 各100〜150字程度`},
+  quiz:{title:"導入クイズ・アイスブレイク",icon:"💡",tag:"授業デザイン",tagClass:"tag-lesson",desc:"生徒の知的好奇心に火をつける、驚きのある導入クイズを作成します。",intentQuestion:"この授業のテーマは何ですか？生徒に「えっ！そうなの？」と驚いてほしい本質的な問いは何ですか？",defaultIntent:"数学の確率の授業。直感と計算結果が大きくズレる事例（誕生日のパラドックスなど）を使って「数学って面白い」と思わせる導入をしたい。",template:i=>`【前提と役割】\nあなたは生徒を惹きつける授業導入のプロフェッショナルです。\n\n【授業テーマと本質的意図（Human Intent）】\n${i}\n\n【タスク】\n授業最初の5分で実施する「導入用3択クイズ」を1問作成してください。\n\n- クイズ問題文（直感を裏切る少し意外なもの）\n- 選択肢A・B・C\n- 正解の解説（なぜこのテーマが大切かを含む）\n- 知的好奇心を刺激する一言締め`}
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Navigation
-  const navButtons = document.querySelectorAll(".nav-btn");
-  const slides = document.querySelectorAll(".slide-section");
-  const switchSlide = (t) => {
-    navButtons.forEach(b => b.classList.toggle("active", b.getAttribute("data-step") === t));
-    slides.forEach(s => { const on = s.id === "slide-"+t; s.classList.toggle("active", on); s.setAttribute("aria-hidden", !on); });
-    document.querySelector(".app-header").scrollIntoView({ behavior: "smooth" });
-  };
-  navButtons.forEach(b => b.addEventListener("click", () => switchSlide(b.getAttribute("data-step"))));
-  document.querySelectorAll(".next-step-btn").forEach(b => b.addEventListener("click", () => switchSlide(b.getAttribute("data-target"))));
+// ===== Radar Chart Data =====
+const radarData = {
+  traditional:{記憶:75,構成:80,執筆:70,形式:65,評価:30,統合:25},
+  balanced:{記憶:55,構成:45,執筆:40,形式:35,評価:75,統合:80},
+  atrophy:{記憶:20,構成:15,執筆:10,形式:25,評価:30,統合:20}
+};
+const radarColors = {traditional:'rgba(130,130,140,0.3)',balanced:'rgba(59,130,246,0.35)',atrophy:'rgba(239,68,68,0.3)'};
+const radarStrokes = {traditional:'#8282a0',balanced:'#3b82f6',atrophy:'#ef4444'};
+let currentRadarMode = 'traditional';
 
-  // Simulator
-  const slider = document.getElementById("intent-slider");
-  const inBox = document.getElementById("sim-input-box");
-  const outBox = document.getElementById("sim-output-box");
-  const updateSim = (v) => { inBox.textContent = simulatorData[v].input; outBox.textContent = simulatorData[v].output; };
-  slider.addEventListener("input", e => updateSim(e.target.value));
-  updateSim(1);
+function drawRadar(canvas, mode){
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const cx = W/2, cy = H/2, r = Math.min(W,H)*0.38;
+  const keys = ['記憶','構成','執筆','形式','評価','統合'];
+  const n = keys.length;
+  const angles = keys.map((_,i)=> -Math.PI/2 + (2*Math.PI/n)*i);
+
+  // Grid
+  for(let g=1;g<=5;g++){
+    ctx.beginPath();
+    angles.forEach((a,i)=>{
+      const x = cx+r*(g/5)*Math.cos(a), y = cy+r*(g/5)*Math.sin(a);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle='rgba(0,0,0,0.07)';ctx.lineWidth=1;ctx.stroke();
+  }
+  // Axes + labels
+  angles.forEach((a,i)=>{
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font='bold 13px system-ui';ctx.fillStyle='#555';ctx.textAlign='center';ctx.textBaseline='middle';
+    const lx=cx+(r+22)*Math.cos(a), ly=cy+(r+22)*Math.sin(a);
+    ctx.fillText(keys[i],lx,ly);
+  });
+
+  // Traditional (gray)
+  const td = radarData.traditional;
+  ctx.beginPath();
+  angles.forEach((a,i)=>{
+    const v = td[keys[i]]/100;
+    const x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.closePath();ctx.fillStyle='rgba(150,150,160,0.2)';ctx.fill();
+  ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;ctx.stroke();
+
+  // Selected mode
+  const d = radarData[mode];
+  ctx.beginPath();
+  angles.forEach((a,i)=>{
+    const v = d[keys[i]]/100;
+    const x=cx+r*v*Math.cos(a),y=cy+r*v*Math.sin(a);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.closePath();ctx.fillStyle=radarColors[mode];ctx.fill();
+  ctx.strokeStyle=radarStrokes[mode];ctx.lineWidth=2.5;ctx.stroke();
+}
+
+// ===== Audit Tool Logic =====
+function getAuditResult(know,complex,ai){
+  const gap = complex - know;
+  const overload = ai - know;
+  if(know>70 && ai>70) return {badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:75};
+  if(know<30 && ai>70) return {badge:'badge-danger',badgeText:'DANGER',title:'学習機会の喪失',desc:'初学者がAIに丸投げしている状態です。本来スキルとして習得すべきプロセスをAIが肩代わりしており、思考の萎縮（Atrophy）が起きています。',pos:95};
+  if(gap>40 && ai>40 && ai<75) return {badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。学習者は本来一人では到達できない高次の目標に取り組めています。フェーディングを意識しましょう。',pos:50};
+  if(ai<20) return {badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題の難度に対してAIの支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:15};
+  if(overload>50) return {badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、かえって学習効率を下げる可能性があります。',pos:85};
+  return {badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:48};
+}
+
+function updateAudit(){
+  const know = +document.getElementById('know-slider').value;
+  const complex = +document.getElementById('complex-slider').value;
+  const ai = +document.getElementById('ai-slider').value;
+  const klabels=['全く知らない','初学者','基礎はある','中級者','上級者','専門家レベル'];
+  const clabels=['単純','やや複雑','複雑','高度','未解決に近い'];
+  const alabels=['自力のみ','補助','ヒント活用','構成任せ','丸投げ'];
+  document.getElementById('know-label').textContent=klabels[Math.round(know/25)]||'専門家レベル';
+  document.getElementById('complex-label').textContent=clabels[Math.round(complex/25)]||'未解決に近い';
+  document.getElementById('ai-label').textContent=alabels[Math.round(ai/25)]||'丸投げ';
+  const r=getAuditResult(know,complex,ai);
+  const badge=document.getElementById('audit-badge');
+  badge.className='audit-result-badge '+r.badge;
+  badge.textContent=r.badgeText;
+  document.getElementById('audit-title').textContent=r.title;
+  document.getElementById('audit-desc').textContent=r.desc;
+  document.getElementById('audit-thumb').style.left=r.pos+'%';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  // Navigation
+  const navBtns=document.querySelectorAll('.nav-btn');
+  const slides=document.querySelectorAll('.slide-section');
+  const switchSlide=t=>{
+    navBtns.forEach(b=>b.classList.toggle('active',b.getAttribute('data-step')===t));
+    slides.forEach(s=>{const on=s.id==='slide-'+t;s.classList.toggle('active',on);s.setAttribute('aria-hidden',!on);});
+    document.querySelector('.app-header').scrollIntoView({behavior:'smooth'});
+    if(t==='3'){setTimeout(()=>drawRadar(document.getElementById('radarChart'),currentRadarMode),100);}
+  };
+  navBtns.forEach(b=>b.addEventListener('click',()=>switchSlide(b.getAttribute('data-step'))));
+  document.querySelectorAll('.next-step-btn').forEach(b=>b.addEventListener('click',()=>switchSlide(b.getAttribute('data-target'))));
+
+  // Intent Simulator
+  const slider=document.getElementById('intent-slider');
+  const inBox=document.getElementById('sim-input-box');
+  const outBox=document.getElementById('sim-output-box');
+  const upSim=v=>{inBox.textContent=simulatorData[v].input;outBox.textContent=simulatorData[v].output;};
+  slider.addEventListener('input',e=>upSim(e.target.value));upSim(1);
+
+  // Radar
+  const radarCanvas=document.getElementById('radarChart');
+  document.querySelectorAll('.radar-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.radar-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      currentRadarMode=b.getAttribute('data-mode');
+      drawRadar(radarCanvas,currentRadarMode);
+    });
+  });
+
+  // Audit
+  ['know-slider','complex-slider','ai-slider'].forEach(id=>document.getElementById(id).addEventListener('input',updateAudit));
+  updateAudit();
 
   // Magic Move
-  const overlay = document.getElementById("magic-move-overlay");
-  const backdrop = document.getElementById("overlay-backdrop");
-  const expCard = document.getElementById("expanded-card");
-  const closeBtn = document.getElementById("close-overlay-btn");
-  const expContent = document.getElementById("expanded-content");
-  let activeCard = null, firstRect = null;
+  const overlay=document.getElementById('magic-move-overlay');
+  const backdrop=document.getElementById('overlay-backdrop');
+  const expCard=document.getElementById('expanded-card');
+  const closeBtn=document.getElementById('close-overlay-btn');
+  const expContent=document.getElementById('expanded-content');
+  let activeCard=null,firstRect=null;
 
-  document.querySelectorAll(".sandbox-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const data = promptCards[card.getAttribute("data-card-id")];
-      if (!data) return;
-      activeCard = card; firstRect = card.getBoundingClientRect();
-      expContent.innerHTML = `
+  document.querySelectorAll('.sandbox-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      const data=promptCards[card.getAttribute('data-card-id')];if(!data)return;
+      activeCard=card;firstRect=card.getBoundingClientRect();
+      expContent.innerHTML=`
         <div class="expanded-header">
           <div class="expanded-badge-row"><span class="card-tag ${data.tagClass}">${data.tag}</span><span class="card-icon-small">${data.icon}</span></div>
           <h2 class="expanded-title">${data.title}</h2><p class="expanded-desc">${data.desc}</p>
@@ -570,73 +729,39 @@ document.addEventListener("DOMContentLoaded", () => {
             <pre id="prompt-preview" class="prompt-view"></pre>
           </div>
         </div>`;
-      const inp = document.getElementById("sb-input");
-      const prev = document.getElementById("prompt-preview");
-      const cpBtn = document.getElementById("copy-prompt-btn");
-      const upd = () => { prev.textContent = data.template(inp.value); };
-      inp.addEventListener("input", upd); upd();
-      cpBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(prev.textContent).then(() => {
-          const o = cpBtn.textContent; cpBtn.textContent = "✓ コピー完了！"; cpBtn.style.backgroundColor = "#28a745";
-          setTimeout(() => { cpBtn.textContent = o; cpBtn.style.backgroundColor = ""; }, 1500);
-        });
-      });
-      overlay.classList.add("visible");
-      const lRect = expCard.getBoundingClientRect();
-      const dX = firstRect.left - lRect.left, dY = firstRect.top - lRect.top;
-      const dW = firstRect.width / lRect.width, dH = firstRect.height / lRect.height;
-      backdrop.animate([{opacity:0},{opacity:1}], {duration:400,easing:"ease-out",fill:"both"});
-      expCard.animate([
-        {transformOrigin:"top left",transform:`translate(${dX}px,${dY}px) scale(${dW},${dH})`,borderRadius:"16px",opacity:.8},
-        {transformOrigin:"top left",transform:"none",borderRadius:"24px",opacity:1}
-      ], {duration:550,easing:"cubic-bezier(0.16,1,0.3,1)",fill:"both"});
-      expContent.animate([{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"none"}], {duration:350,delay:200,easing:"ease-out",fill:"both"});
+      const inp=document.getElementById('sb-input'),prev=document.getElementById('prompt-preview'),cpBtn=document.getElementById('copy-prompt-btn');
+      const upd=()=>{prev.textContent=data.template(inp.value);};
+      inp.addEventListener('input',upd);upd();
+      cpBtn.addEventListener('click',()=>{navigator.clipboard.writeText(prev.textContent).then(()=>{const o=cpBtn.textContent;cpBtn.textContent='✓ コピー完了！';cpBtn.style.background='#28a745';setTimeout(()=>{cpBtn.textContent=o;cpBtn.style.background='';},1500);});});
+      overlay.classList.add('visible');
+      const lRect=expCard.getBoundingClientRect();
+      const dX=firstRect.left-lRect.left,dY=firstRect.top-lRect.top,dW=firstRect.width/lRect.width,dH=firstRect.height/lRect.height;
+      backdrop.animate([{opacity:0},{opacity:1}],{duration:400,easing:'ease-out',fill:'both'});
+      expCard.animate([{transformOrigin:'top left',transform:`translate(${dX}px,${dY}px) scale(${dW},${dH})`,borderRadius:'16px',opacity:.8},{transformOrigin:'top left',transform:'none',borderRadius:'24px',opacity:1}],{duration:550,easing:'cubic-bezier(0.16,1,0.3,1)',fill:'both'});
+      expContent.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:350,delay:200,easing:'ease-out',fill:'both'});
     });
   });
 
-  const closeOverlay = () => {
-    if (!activeCard || !firstRect) { overlay.classList.remove("visible"); return; }
-    const cR = expCard.getBoundingClientRect();
-    const a = expCard.animate([
-      {transformOrigin:"top left",transform:"none",borderRadius:"24px",opacity:1},
-      {transformOrigin:"top left",transform:`translate(${firstRect.left-cR.left}px,${firstRect.top-cR.top}px) scale(${firstRect.width/cR.width},${firstRect.height/cR.height})`,borderRadius:"16px",opacity:0}
-    ], {duration:450,easing:"cubic-bezier(0.16,1,0.3,1)",fill:"both"});
-    backdrop.animate([{opacity:1},{opacity:0}], {duration:350,easing:"ease-in",fill:"both"});
-    a.onfinish = () => { overlay.classList.remove("visible"); activeCard = null; firstRect = null; };
+  const closeOverlay=()=>{
+    if(!activeCard||!firstRect){overlay.classList.remove('visible');return;}
+    const cR=expCard.getBoundingClientRect();
+    const a=expCard.animate([{transformOrigin:'top left',transform:'none',borderRadius:'24px',opacity:1},{transformOrigin:'top left',transform:`translate(${firstRect.left-cR.left}px,${firstRect.top-cR.top}px) scale(${firstRect.width/cR.width},${firstRect.height/cR.height})`,borderRadius:'16px',opacity:0}],{duration:450,easing:'cubic-bezier(0.16,1,0.3,1)',fill:'both'});
+    backdrop.animate([{opacity:1},{opacity:0}],{duration:350,easing:'ease-in',fill:'both'});
+    a.onfinish=()=>{overlay.classList.remove('visible');activeCard=null;firstRect=null;};
   };
-  closeBtn.addEventListener("click", closeOverlay);
-  backdrop.addEventListener("click", closeOverlay);
+  closeBtn.addEventListener('click',closeOverlay);backdrop.addEventListener('click',closeOverlay);
 
   // Reflection Form
-  const form = document.getElementById("reflection-form");
-  const resultBox = document.getElementById("action-plan-result");
-  const planOut = document.getElementById("plan-output-text");
-  const genMd = (d) => `# 🚀 明日からの「AI共創アクションプラン」\n\n- **作成日**: ${d.date}\n- **実践者**: ${d.teacherName} 先生（愛媛県立八幡浜高等学校）\n\n---\n\n## 💡 1. 私の教育・校務にかける意図 (Human Intent)\n${d.intent}\n\n---\n\n## 🪞 2. AIとAdobeをどう活用するか？\n${d.method}\n\n---\n\n## 📌 Brain-First 哲学\n「主役は常に、あなたの脳（教育的意図）である。AIはそれを加速し、映し出す鏡に過ぎない。意図なき指示に価値はない。まず、あなたがどうしたいかから始めよう。」`;
-  const renderPlan = (d) => { planOut.textContent = genMd(d); resultBox.classList.remove("hidden"); resultBox.scrollIntoView({ behavior: "smooth" }); };
-
-  const saved = localStorage.getItem("yawatahama_plan");
-  if (saved) { const d = JSON.parse(saved); document.getElementById("ref-intent").value = d.intent||""; document.getElementById("ref-method").value = d.method||""; document.getElementById("ref-teacher-name").value = d.teacherName||""; renderPlan(d); }
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const d = { intent: document.getElementById("ref-intent").value, method: document.getElementById("ref-method").value, teacherName: document.getElementById("ref-teacher-name").value, date: new Date().toLocaleDateString("ja-JP") };
-    localStorage.setItem("yawatahama_plan", JSON.stringify(d));
-    renderPlan(d);
-  });
-
-  document.getElementById("copy-plan-btn").addEventListener("click", () => {
-    navigator.clipboard.writeText(planOut.textContent).then(() => {
-      const b = document.getElementById("copy-plan-btn"), o = b.textContent;
-      b.textContent = "✓ コピー完了！"; setTimeout(() => { b.textContent = o; }, 1500);
-    });
-  });
-  document.getElementById("download-plan-btn").addEventListener("click", () => {
-    const d = JSON.parse(localStorage.getItem("yawatahama_plan")||"{}");
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([genMd(d)], {type:"text/markdown;charset=utf-8;"}));
-    a.download = `AI共創アクションプラン_${d.teacherName}.md`;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  });
+  const form=document.getElementById('reflection-form');
+  const resultBox=document.getElementById('action-plan-result');
+  const planOut=document.getElementById('plan-output-text');
+  const genMd=d=>`# 🚀 明日からの「AI共創アクションプラン」\n\n- **作成日**: ${d.date}\n- **実践者**: ${d.teacherName} 先生（愛媛県立八幡浜高等学校）\n\n---\n\n## 💡 1. 私の教育・校務にかける意図 (Human Intent)\n${d.intent}\n\n---\n\n## 🧠 2. 認知オフロードの設計（Fading Scaffold / High-Road Transfer）\n${d.method}\n\n---\n\n## 📌 Brain-First 哲学\n「主役は常に、あなたの脳（教育的意図）である。AIはそれを加速し、映し出す鏡に過ぎない。意図なき指示に価値はない。まず、あなたがどうしたいかから始めよう。」`;
+  const renderPlan=d=>{planOut.textContent=genMd(d);resultBox.classList.remove('hidden');resultBox.scrollIntoView({behavior:'smooth'});};
+  const saved=localStorage.getItem('yawatahama_plan');
+  if(saved){const d=JSON.parse(saved);document.getElementById('ref-intent').value=d.intent||'';document.getElementById('ref-method').value=d.method||'';document.getElementById('ref-teacher-name').value=d.teacherName||'';renderPlan(d);}
+  form.addEventListener('submit',e=>{e.preventDefault();const d={intent:document.getElementById('ref-intent').value,method:document.getElementById('ref-method').value,teacherName:document.getElementById('ref-teacher-name').value,date:new Date().toLocaleDateString('ja-JP')};localStorage.setItem('yawatahama_plan',JSON.stringify(d));renderPlan(d);});
+  document.getElementById('copy-plan-btn').addEventListener('click',()=>{navigator.clipboard.writeText(planOut.textContent).then(()=>{const b=document.getElementById('copy-plan-btn'),o=b.textContent;b.textContent='✓ コピー完了！';setTimeout(()=>{b.textContent=o;},1500);});});
+  document.getElementById('download-plan-btn').addEventListener('click',()=>{const d=JSON.parse(localStorage.getItem('yawatahama_plan')||'{}');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([genMd(d)],{type:'text/markdown;charset=utf-8;'}));a.download=`AI共創アクションプラン_${d.teacherName}.md`;document.body.appendChild(a);a.click();document.body.removeChild(a);});
 });
 </script>
 </body>
