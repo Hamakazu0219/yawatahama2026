@@ -149,7 +149,7 @@
     .audit-result h4{font-size:1.1rem;font-weight:800;margin-bottom:.75rem;}
     .audit-result p{font-size:.88rem;color:var(--text-muted);line-height:1.7;}
     .audit-bar-wrap{margin-top:1rem;}
-    .audit-bar-track{height:8px;background:linear-gradient(to right,#93c5fd,#3b82f6,#f97316);border-radius:99px;position:relative;}
+    .audit-bar-track{height:8px;background:linear-gradient(to right,#f97316,#22c55e,#ef4444);border-radius:99px;position:relative;}
     .audit-bar-thumb{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #3b82f6;transition:left .3s ease;}
     .audit-bar-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);margin-top:.35rem;}
     .audit-hint{background:rgba(59,91,219,.06);border-radius:12px;padding:1rem 1.25rem;margin-top:1.25rem;font-size:.83rem;color:#3b5bdb;line-height:1.65;}
@@ -443,7 +443,7 @@
             <input type="range" class="audit-slider" id="ai-slider" min="0" max="100" value="30">
             <div class="slider-range-labels"><span>自力のみ</span><span>ヒント・構成案</span><span>丸投げ・全自動</span></div>
           </div>
-          <div class="audit-hint">💡 <strong>ヒント：</strong>「知識レベル」を最大にして「AI利用」も最大にしてみてください。熟達者の効率的オフロードとして肯定的に評価されます。逆に「知識レベル」最小・「AI利用」最大にすると、学習機会の喪失（ZND）として強い警告が出ます。</div>
+          <div class="audit-hint">💡 <strong>ヒント：</strong>① 知識レベル最大＋AI利用最大 → 熟達者の効率的オフロードとして肯定的に評価。② 知識レベル最小＋AI利用最大 → 学習機会の喪失（ZND）として強い警告。③ 知識レベル最大＋課題を未解決の難問＋AI利用ゼロ → 負荷は高いが「生産的苦闘」として肯定的に評価されます（専門家でも難問なら負荷は高い）。</div>
         </div>
         <div class="audit-result" id="audit-result">
           <span class="audit-result-badge badge-good" id="audit-badge">GOOD BALANCE</span>
@@ -451,7 +451,7 @@
           <p id="audit-desc">AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。</p>
           <div class="audit-bar-wrap">
             <div class="audit-bar-track"><div class="audit-bar-thumb" id="audit-thumb"></div></div>
-            <div class="audit-bar-labels"><span>負荷不足</span><span>最適ゾーン</span><span>過負荷 / 代行</span></div>
+            <div class="audit-bar-labels"><span>過負荷（自力で苦闘）</span><span>最適ゾーン</span><span>負荷不足 / 代行</span></div>
           </div>
         </div>
       </div>
@@ -723,15 +723,24 @@ function drawRadar(canvas,mode){
 
 // ===== Audit Tool =====
 function getAuditResult(know,complex,ai){
-  // posはAI利用量をベースに知識レベルで補正：熟達者の高AIは適切なので右に行かない
-  const rawPos=Math.max(5,Math.min(93, ai - know*0.3 + 15));
-  const overload=ai-know;
-  if(know>70&&ai>70)return{badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:rawPos};
-  if(know<30&&ai>70)return{badge:'badge-danger',badgeText:'ZND DANGER',title:'学習機会の喪失（Zone of No Development）',desc:'初学者がAIに丸投げしている状態です。本来習得すべきプロセスをAIが肩代わりし、認知的萎縮（Atrophy）が起きています。メタ認知的怠惰の典型パターンです。',pos:rawPos};
-  if(complex>50&&ai>30&&ai<70&&know<60)return{badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。',pos:rawPos};
-  if(ai<15)return{badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題難度に対してAI支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:rawPos};
-  if(overload>50)return{badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、逆に学習効率を下げる可能性があります（Expertise Reversal Effect）。',pos:rawPos};
-  return{badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:rawPos};
+  // この学習者にとっての「課題が要求する認知的負荷（デマンド）」
+  // 知識があるほど同じ課題でも負荷は下がるが、複雑性が高ければ専門家でも負荷は残る
+  const demand=Math.max(0, complex - know*0.6);
+  // net>0: AI支援がデマンドを上回る＝負荷不足/代行 ／ net<0: 支援不足＝過負荷
+  const net=ai - demand*0.8;
+  // バー位置：左(0)=過負荷、中央(50)=最適、右(100)=負荷不足/代行
+  const pos=Math.round(Math.max(5,Math.min(95, 50 + net*0.9)));
+
+  if(net<=-25){ // 高負荷ゾーン（自力で苦闘・支援不足）
+    if(know<30) return{badge:'badge-danger',badgeText:'COGNITIVE OVERLOAD',title:'認知的過負荷（挫折リスク）',desc:'支援が乏しいまま初学者が難問に独力で立ち向かい、ワーキングメモリが飽和しています。適切な足場かけ（Scaffolding）が必要です。',pos:pos};
+    return{badge:'badge-good',badgeText:'PRODUCTIVE STRUGGLE',title:'生産的苦闘（Productive Struggle）',desc:'負荷は高いものの、学習者の知識で対処可能な「望ましい困難」の領域です。専門家が未解決の難問に挑む状態であり、深い理解と転移が促されます。',pos:pos};
+  }
+  if(net>=30){ // 低負荷ゾーン（AIが代行）
+    if(know<40) return{badge:'badge-danger',badgeText:'ZND DANGER',title:'学習機会の喪失（ZND / 代行）',desc:'AIが本来学習者が担うべき認知的処理を代行しています。負荷が低すぎて学びが起きません（認知的萎縮＝Atrophy）。メタ認知的怠惰の典型です。',pos:pos};
+    return{badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者が低次スキルをAIに委ね、高次の思考に認知資源を集中させています。High-Road Transferが成立しています。',pos:pos};
+  }
+  // 最適ゾーン
+  return{badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'課題難度・既有知識・AI支援のバランスが最適ゾーンにあります。フェーディング（徐々に支援を減らす）を意識して調整しましょう。',pos:pos};
 }
 
 function updateAudit(){
