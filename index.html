@@ -723,13 +723,15 @@ function drawRadar(canvas,mode){
 
 // ===== Audit Tool =====
 function getAuditResult(know,complex,ai){
+  // posはAI利用量をベースに知識レベルで補正：熟達者の高AIは適切なので右に行かない
+  const rawPos=Math.max(5,Math.min(93, ai - know*0.3 + 15));
   const overload=ai-know;
-  if(know>70&&ai>70)return{badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:70};
-  if(know<30&&ai>70)return{badge:'badge-danger',badgeText:'ZND DANGER',title:'学習機会の喪失（Zone of No Development）',desc:'初学者がAIに丸投げしている状態です。本来習得すべきプロセスをAIが肩代わりし、認知的萎縮（Atrophy）が起きています。メタ認知的怠惰の典型パターンです。',pos:95};
-  if(complex>50&&ai>30&&ai<70&&know<60)return{badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。',pos:50};
-  if(ai<15)return{badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題難度に対してAI支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:15};
-  if(overload>50)return{badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、逆に学習効率を下げる可能性があります（Expertise Reversal Effect）。',pos:82};
-  return{badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:48};
+  if(know>70&&ai>70)return{badge:'badge-good',badgeText:'ADAPTIVE USE',title:'効率的なオフロード（適応的利用）',desc:'熟達者として低次スキルをAIに委ね、高次の思考に集中しています。High-Road Transferが成立しています。',pos:rawPos};
+  if(know<30&&ai>70)return{badge:'badge-danger',badgeText:'ZND DANGER',title:'学習機会の喪失（Zone of No Development）',desc:'初学者がAIに丸投げしている状態です。本来習得すべきプロセスをAIが肩代わりし、認知的萎縮（Atrophy）が起きています。メタ認知的怠惰の典型パターンです。',pos:rawPos};
+  if(complex>50&&ai>30&&ai<70&&know<60)return{badge:'badge-good',badgeText:'GOOD BALANCE',title:'最適な足場かけ（Scaffolding）',desc:'AIが学習者の「できない部分」を適切に補っています。フェーディング（徐々に支援を減らす）を意識しましょう。',pos:rawPos};
+  if(ai<15)return{badge:'badge-warn',badgeText:'UNDERLOAD',title:'支援不足の可能性',desc:'課題難度に対してAI支援が少なすぎる場合、認知的に孤立して学習が停滞することがあります。適切な足場かけを検討してください。',pos:rawPos};
+  if(overload>50)return{badge:'badge-danger',badgeText:'EXPERTISE REVERSAL',title:'Expertise Reversal Effect の危険',desc:'熟達度に対してAI支援が多すぎます。既に内在化された知識と干渉し、逆に学習効率を下げる可能性があります（Expertise Reversal Effect）。',pos:rawPos};
+  return{badge:'badge-good',badgeText:'BALANCED',title:'バランスの取れた活用',desc:'現在の知識レベルと課題難度に対して、AI利用量がおおむね適切です。引き続きフェーディングを意識して支援を調整していきましょう。',pos:rawPos};
 }
 
 function updateAudit(){
